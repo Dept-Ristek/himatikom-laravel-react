@@ -8,7 +8,15 @@ import {
     CommandSeparator,
 } from "@/Components/ui/command";
 import { Link } from "@inertiajs/react";
-import { Building2Icon, LayoutDashboardIcon, LogOutIcon, MessageCircleMoreIcon, Settings, User } from "lucide-react";
+import {
+    Building2Icon,
+    LayoutDashboardIcon,
+    LogOutIcon,
+    Settings,
+    User,
+    Users2Icon,
+    BookKeyIcon,
+} from "lucide-react";
 import { AlertDialog, AlertDialogTrigger } from "@/Components/ui/alert-dialog";
 import AlertLogout from "@/Layouts/components/AlertLogout";
 interface CommandContentProps {
@@ -30,10 +38,22 @@ const CommandContent = ({ className }: CommandContentProps) => {
                             Dashboard
                         </CommandItem>
                     </Link>
+                    <Link href={route('admin.user.index')}>
+                        <CommandItem className={url == 'admin.user.index' ? "bg-white text-black" : "text-white"}>
+                            <Users2Icon size={20} className="mr-2" />
+                            Users
+                        </CommandItem>
+                    </Link>
                     <Link href={route('admin.prodi.index')}>
                         <CommandItem className={url == 'admin.prodi.index' ? "bg-white text-black" : "text-white"}>
                             <Building2Icon size={20} className="mr-2" />
                             Program Studi
+                        </CommandItem>
+                    </Link>
+                    <Link href={route('admin.kepengurusan.index')}>
+                        <CommandItem className={url == 'admin.kepengurusan.index' ? "bg-white text-black" : "text-white"}>
+                            <BookKeyIcon size={20} className="mr-2" />
+                            Kepengurusan
                         </CommandItem>
                     </Link>
                 </CommandGroup>

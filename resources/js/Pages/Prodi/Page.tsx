@@ -4,8 +4,8 @@ import MainLayout from "@/Layouts/MainLayout";
 import DataTable from "@/Components/DataTable";
 import ProdiTableColumns from "@/Pages/Prodi/addon/Columns";
 import { ColumnDef } from "@tanstack/react-table";
-import { useToast } from "@/hooks/use-toast";
-import { useEffect } from "react";
+// import { useToast } from "@/hooks/use-toast";
+// import { useEffect } from "react";
 
 interface PageProdiProps {
     title: string;
@@ -13,17 +13,6 @@ interface PageProdiProps {
 }
 
 const PageProdi = ({ title, prodis }: PageProdiProps) => {
-    const { toast } = useToast();
-    const flashMessage = usePage().props.flash;
-    useEffect(() => {
-        if (flashMessage) {
-            toast({
-                variant: flashMessage.message.variant,
-                title: flashMessage.message.title,
-                description: flashMessage.message.description
-            })
-        }
-    }, [])
     return (
         <MainLayout>
             <Head title={title} />

@@ -5,7 +5,10 @@ import { Transition } from "@headlessui/react";
 import { Button } from "@/Components/ui/button";
 import { FormEventHandler } from "react";
 import MainLayout from "@/Layouts/MainLayout";
-const PageCreateProdi = ({ title }: { title: string }) => {
+interface PageCreateProdiProps {
+    title: string;
+}
+const PageCreateProdi = ({ title }: PageCreateProdiProps) => {
     const { data, setData, post, errors, processing, recentlySuccessful } = useForm<{ name: string }>({
         name: "",
     });
