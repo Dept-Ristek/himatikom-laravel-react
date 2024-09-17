@@ -1,15 +1,13 @@
-import { Prodi, FlashMessage } from "@/Pages/Prodi/types";
-import { Head, Link, usePage } from "@inertiajs/react";
+import { Prodi } from "@/Pages/Prodi/types";
+import { Head, Link } from "@inertiajs/react";
+import { ColumnDef } from "@tanstack/react-table";
 import MainLayout from "@/Layouts/MainLayout";
 import DataTable from "@/Components/DataTable";
 import ProdiTableColumns from "@/Pages/Prodi/addon/Columns";
-import { ColumnDef } from "@tanstack/react-table";
-// import { useToast } from "@/hooks/use-toast";
-// import { useEffect } from "react";
 
 interface PageProdiProps {
     title: string;
-    prodis: Prodi;
+    prodis: Prodi[];
 }
 
 const PageProdi = ({ title, prodis }: PageProdiProps) => {

@@ -7,7 +7,7 @@ import {
     CommandList,
     CommandSeparator,
 } from "@/Components/ui/command";
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import {
     Building2Icon,
     LayoutDashboardIcon,
@@ -16,6 +16,9 @@ import {
     User,
     Users2Icon,
     BookKeyIcon,
+    ShieldCheckIcon,
+    BookMarkedIcon,
+    BookUserIcon
 } from "lucide-react";
 import { AlertDialog, AlertDialogTrigger } from "@/Components/ui/alert-dialog";
 import AlertLogout from "@/Layouts/components/AlertLogout";
@@ -24,6 +27,8 @@ interface CommandContentProps {
 }
 const CommandContent = ({ className }: CommandContentProps) => {
     const url = route().current()
+    const user = usePage().props.auth.user;
+    const roles = ['admin', 'pengurus'];
     return (
         <Command className={className}>
             <div>
@@ -31,32 +36,51 @@ const CommandContent = ({ className }: CommandContentProps) => {
             </div>
             <CommandList className="max-h-screen">
                 <CommandEmpty>No results found.</CommandEmpty>
-                <CommandGroup heading="App">
-                    <Link href={route('dashboard')}>
-                        <CommandItem className={url == 'dashboard' ? "bg-white text-black" : "text-white"}>
-                            <LayoutDashboardIcon size={20} className="mr-2" />
-                            Dashboard
-                        </CommandItem>
-                    </Link>
-                    <Link href={route('admin.user.index')}>
-                        <CommandItem className={url == 'admin.user.index' ? "bg-white text-black" : "text-white"}>
-                            <Users2Icon size={20} className="mr-2" />
-                            Users
-                        </CommandItem>
-                    </Link>
-                    <Link href={route('admin.prodi.index')}>
-                        <CommandItem className={url == 'admin.prodi.index' ? "bg-white text-black" : "text-white"}>
-                            <Building2Icon size={20} className="mr-2" />
-                            Program Studi
-                        </CommandItem>
-                    </Link>
-                    <Link href={route('admin.kepengurusan.index')}>
-                        <CommandItem className={url == 'admin.kepengurusan.index' ? "bg-white text-black" : "text-white"}>
-                            <BookKeyIcon size={20} className="mr-2" />
-                            Kepengurusan
-                        </CommandItem>
-                    </Link>
-                </CommandGroup>
+                {user.roles && user.roles == 'admin' || user.roles == 'pengurus' ?
+                    <CommandGroup heading="Pengurus | Admin Menu">
+                        <Link href={route('dashboard')}>
+                            <CommandItem className={url == 'dashboard' ? "bg-white text-black" : "text-white"}>
+                                <LayoutDashboardIcon size={20} className="mr-2" />
+                                Dashboard
+                            </CommandItem>
+                        </Link>
+                        <Link href={route('admin.user.index')}>
+                            <CommandItem className={url == 'admin.user.index' ? "bg-white text-black" : "text-white"}>
+                                <Users2Icon size={20} className="mr-2" />
+                                Users
+                            </CommandItem>
+                        </Link>
+                        <Link href={route('admin.prodi.index')}>
+                            <CommandItem className={url == 'admin.prodi.index' ? "bg-white text-black" : "text-white"}>
+                                <Building2Icon size={20} className="mr-2" />
+                                Program Studi
+                            </CommandItem>
+                        </Link>
+                        <Link href={route('admin.kepengurusan.index')}>
+                            <CommandItem className={url == 'admin.kepengurusan.index' ? "bg-white text-black" : "text-white"}>
+                                <BookKeyIcon size={20} className="mr-2" />
+                                Kepengurusan
+                            </CommandItem>
+                        </Link>
+                        <Link href={route('admin.pengurus.index')}>
+                            <CommandItem className={url == 'admin.pengurus.index' ? "bg-white text-black" : "text-white"}>
+                                <ShieldCheckIcon size={20} className="mr-2" />
+                                Pengurus
+                            </CommandItem>
+                        </Link>
+                        <Link href={route('admin.kepanitiaan.index')}>
+                            <CommandItem className={url == 'admin.kepanitiaan.index' ? "bg-white text-black" : "text-white"}>
+                                <BookUserIcon size={20} className="mr-2" />
+                                Struktur Kepanitiaan
+                            </CommandItem>
+                        </Link>
+                        {/* <Link href={route('dashboard')}>
+                            <CommandItem className={url == 'dashboard' ? "bg-white text-black" : "text-white"}>
+                                <BookMarkedIcon size={20} className="mr-2" />
+                                Program Kerja | Agenda
+                            </CommandItem>
+                        </Link> */}
+                    </CommandGroup> : <></>}
                 <CommandSeparator />
                 <CommandGroup heading="Settings">
                     <Link href="/profile">

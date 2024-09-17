@@ -7,7 +7,7 @@ import DataTable from "@/Components/DataTable";
 
 interface PageUsersProps {
     title: string;
-    users: Users
+    users: Users[]
 }
 
 const PageUsers = ({ title, users }: PageUsersProps) => {

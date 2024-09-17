@@ -1,8 +1,8 @@
 export interface Kepengurusans {
-    id?: string;
+    id: string;
     name: string;
     description: string;
-    poster: File | null;
+    poster: File | string | null;
     periode: string;
     _method: string;
 }

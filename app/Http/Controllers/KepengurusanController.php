@@ -97,6 +97,14 @@ class KepengurusanController extends Controller
      */
     public function destroy(Kepengurusan $kepengurusan)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $kepengurusan->delete();
+            DB::commit();
+            return Redirect::route('admin.kepengurusan.index');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return Redirect::route('admin.kepengurusan.index')->with('error', 'Gagal menghapus data!');
+        }
     }
 }

@@ -49,7 +49,7 @@ const MainNavbar = ({ user, className }: MainNavbarProps) => {
                     <DropdownMenuTrigger className='flex gap-2 items-center'>
                         <span className="text-sm hidden md:block lg:block">{user.name}</span>
                         <Avatar>
-                            <AvatarImage src='https://github.com/shadcn.png' alt="@shadcn" />
+                            <AvatarImage src={user.avatar ?? "https://github.com/shadcn.png"} alt="@shadcn" className="object-cover" />
                             <AvatarFallback className="text-black">BT</AvatarFallback>
                         </Avatar>
                     </DropdownMenuTrigger>

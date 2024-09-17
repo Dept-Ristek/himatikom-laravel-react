@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\KepanitiaanController;
 use App\Http\Controllers\KepengurusanController;
+use App\Http\Controllers\PengurusController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Models\Pengurus;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -60,6 +63,32 @@ Route::prefix('admin')->name('admin.')->group(function() {
         Route::put('/kepengurusan/update/{kepengurusan}', 'update')->name('kepengurusan.update');
 
         Route::post('/kepengurusan/store', 'store')->name('kepengurusan.store');
+
+        Route::delete('/kepengurusan/delete/{kepengurusan}', 'destroy')->name('kepengurusan.delete');
+    });
+
+    Route::controller(PengurusController::class)->middleware(['auth'])->group(function() {
+        Route::get('/pengurus', 'index')->name('pengurus.index');
+        Route::get('/pengurus/create', 'create')->name('pengurus.create');
+        Route::get('/pengurus/edit/{pengurus}', 'edit')->name('pengurus.edit');
+
+        Route::post('/pengurus/store', 'store')->name('pengurus.store');
+
+        Route::put('/pengurus/update/{pengurus}', 'update')->name('pengurus.update');
+
+        Route::delete('/pengurus/delete/{pengurus}', 'destroy')->name('pengurus.delete');
+    });
+
+    Route::controller(KepanitiaanController::class)->middleware(['auth'])->group(function() {
+        Route::get('/kepanitiaan', 'index')->name('kepanitiaan.index');
+        Route::get('/kepanitiaan/create', 'create')->name('kepanitiaan.create');
+        Route::get('/kepanitiaan/edit/{kepanitiaan}', 'edit')->name('kepanitiaan.edit');
+
+        Route::post('/kepanitiaan/store', 'store')->name('kepanitiaan.store');
+
+        Route::put('/kepanitiaan/update/{kepanitiaan}', 'update')->name('kepanitiaan.update');
+
+        Route::delete('/kepanitiaan/delete/{kepantiaan}', 'destroy')->name('kepanitiaan.delete');
     });
 });
 

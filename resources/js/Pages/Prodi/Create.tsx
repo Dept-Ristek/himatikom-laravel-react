@@ -1,10 +1,10 @@
 import { Head, Link, useForm } from "@inertiajs/react";
 import { Input } from "@/Components/ui/input";
-import { Label } from "@/Components/ui/label";
 import { Transition } from "@headlessui/react";
 import { Button } from "@/Components/ui/button";
 import { FormEventHandler } from "react";
 import MainLayout from "@/Layouts/MainLayout";
+import { Label } from "@/components/ui/label";
 interface PageCreateProdiProps {
     title: string;
 }

@@ -5,21 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Kepengurusan extends Model
+class Kepanitiaan extends Model
 {
     use HasFactory, HasUuids, SoftDeletes;
+
     protected $fillable = [
         'name',
-        'poster',
+        'slug',
         'description',
-        'periode'
-    ];
-
-    protected $nullable = [
-        'poster'
     ];
 
     protected $hidden = [
@@ -28,8 +24,13 @@ class Kepengurusan extends Model
         'deleted_at',
     ];
 
-    public function pengurus(): HasMany
+    public function prokers(): BelongsToMany
     {
-        return $this->hasMany(Pengurus::class);
+        return $this->belongsToMany(Proker::class, 'kepanitiaan_prokers');
+    }
+
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'kepanitiaan_prokers');
     }
 }
