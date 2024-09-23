@@ -1,12 +1,12 @@
 import { Head, Link } from "@inertiajs/react";
-import { Kepengurusans } from '@/Pages/Kepengurusan/types';
+import { Kepengurusan } from '@/types';
 import { ColumnDef } from "@tanstack/react-table";
 import MainLayout from "@/Layouts/MainLayout";
 import DataTable from "@/Components/DataTable";
 import KepengurusanTableColumn from "@/Pages/Kepengurusan/addon/Columns";
 interface PageKepengurusanProps {
     title: string;
-    kepengurusans: Kepengurusans
+    kepengurusans: Kepengurusan[]
 }
 const PageKepengurusan = ({ title, kepengurusans }: PageKepengurusanProps) => {
     return (
@@ -21,7 +21,7 @@ const PageKepengurusan = ({ title, kepengurusans }: PageKepengurusanProps) => {
                         </Link>
                     </div>
                 </div>
-                <DataTable<Kepengurusans, ColumnDef<Kepengurusans>> columns={KepengurusanTableColumn} data={kepengurusans} querySearch={"name"} />
+                <DataTable<Kepengurusan, ColumnDef<Kepengurusan>> columns={KepengurusanTableColumn} data={kepengurusans} querySearch={"name"} />
             </div>
         </MainLayout>
     );

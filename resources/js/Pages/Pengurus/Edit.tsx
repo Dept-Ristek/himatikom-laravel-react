@@ -1,9 +1,8 @@
-import { Users } from "@/Pages/Users/types";
-import { Kepengurusans } from "@/Pages/Kepengurusan/types";
+import { User, Kepengurusan, Pengurus } from "@/types";
 import { Head, Link, router, useForm } from "@inertiajs/react";
 import { Transition } from "@headlessui/react";
 import { Button } from "@/Components/ui/button";
-import { FormEventHandler, useEffect, useRef, useState } from "react";
+import { FormEventHandler, useState } from "react";
 import {
     CaretSortIcon,
     CheckIcon
@@ -25,50 +24,30 @@ import { cn } from "@/lib/utils";
 import { levels } from "@/Pages/Pengurus/types/data";
 import { Label } from "@/components/ui/label";
 import MainLayout from "@/Layouts/MainLayout";
-import { Pengurus } from "@/Pages/Pengurus/types";
 
 interface PageCreatePengurusProps {
     title: string;
-    pengurus: Pengurus
-    users: Users[];
-    kepengurusans: Kepengurusans[]
-}
-
-interface PengurusFormType {
-    user_id: string;
-    kepengurusan_id: string;
-    level: string;
-    _method: string;
+    pengurus: Pengurus;
+    users: User[];
+    kepengurusans: Kepengurusan[]
 }
 
 const PageCreatePengurus = ({ title, pengurus, users, kepengurusans }: PageCreatePengurusProps) => {
-    const { data, setData, post, errors, processing, recentlySuccessful } = useForm<PengurusFormType>({
-        user_id: pengurus.user.id,
-        kepengurusan_id: pengurus.kepengurusan.id,
+    const { data, setData, post, errors, processing, recentlySuccessful } = useForm<Pengurus>({
+        user_id: pengurus.user_id,
+        kepengurusan_id: pengurus.kepengurusan_id,
         level: pengurus.level,
         _method: "PUT",
     });
     const [label, setLabel] = useState<{
-        user_label: string | null,
-        kepengurusan_label: string | null,
-        level_label: string | null,
+        user_label?: string | null,
+        kepengurusan_label?: string | null,
+        level_label?: string | null,
     }>({
-        user_label: null,
-        kepengurusan_label: null,
-        level_label: null,
+        user_label: `(${pengurus?.user?.nim}) ${pengurus?.user?.name}`,
+        kepengurusan_label: pengurus?.kepengurusan?.name,
+        level_label: levels[+pengurus.level - 1]['label'],
     });
-
-    useEffect(() => {
-        Promise.all([
-            setLabel((val) => ({
-                ...val,
-                user_label: `(${pengurus.user.nim}) ${pengurus.user.name}`,
-                kepengurusan_label: pengurus.kepengurusan.name,
-                level_label: levels[+pengurus.level - 1]['label']
-            })),
-        ])
-    }, [])
-
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
         post(route('admin.pengurus.update', pengurus.id));

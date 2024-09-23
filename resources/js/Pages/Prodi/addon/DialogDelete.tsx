@@ -8,7 +8,7 @@ import {
     AlertDialogTitle,
 } from "@/Components/ui/alert-dialog";
 import { Link } from '@inertiajs/react';
-import { Prodi } from '@/Pages/Prodi/types/index';
+import { Prodi } from '@/types';
 const DialogDeleteProdi = ({ prodi }: { prodi: Prodi }) => {
     return (
         <AlertDialogContent>

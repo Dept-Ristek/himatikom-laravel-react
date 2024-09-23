@@ -1,19 +1,15 @@
 import { Head, Link, useForm } from "@inertiajs/react";
-import MainLayout from "@/Layouts/MainLayout";
 import { FormEventHandler } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/Components/ui/input";
 import { Button } from "@/Components/ui/button";
 import { Transition } from "@headlessui/react";
 import { Textarea } from '@/Components/ui/textarea';
-import { Kepanitiaans } from "@/Pages/Kepanitiaan/types";
+import { Kepanitiaan } from "@/types";
+import MainLayout from "@/Layouts/MainLayout";
 
-interface PageCreateKepengurusanProps {
-    title: string;
-}
-
-const PageCreateKepanitiaan = ({ title }: PageCreateKepengurusanProps) => {
-    const { data, setData, post, errors, processing, recentlySuccessful } = useForm<Kepanitiaans>({
+const PageCreateKepanitiaan = ({ title }: { title: string }) => {
+    const { data, setData, post, errors, processing, recentlySuccessful } = useForm<Kepanitiaan>({
         name: "",
         description: "",
     });

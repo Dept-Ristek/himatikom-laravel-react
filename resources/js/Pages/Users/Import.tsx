@@ -1,18 +1,13 @@
 import { Head, Link, useForm } from "@inertiajs/react";
 import { Input } from "@/Components/ui/input";
-import { Label } from "@/Components/ui/label";
+import { Label } from "@/components/ui/label";
 import { Transition } from "@headlessui/react";
 import { Button } from "@/Components/ui/button";
 import React, { FormEventHandler, useState } from "react";
 import MainLayout from "@/Layouts/MainLayout";
-interface PageImportUserProps {
-    title: string;
-}
-interface UserImportFormType {
-    file: File | null;
-}
-const PageImportUser = ({ title }: PageImportUserProps) => {
-    const { data, setData, post, errors, processing, recentlySuccessful } = useForm<UserImportFormType>({
+
+const PageImportUser = ({ title }: { title: string }) => {
+    const { data, setData, post, errors, processing, recentlySuccessful } = useForm<{ file: File | null }>({
         file: null,
     });
     const onChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {

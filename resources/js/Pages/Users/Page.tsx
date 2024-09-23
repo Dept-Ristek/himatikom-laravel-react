@@ -1,5 +1,5 @@
 import { Head, Link } from "@inertiajs/react";
-import { Users } from "@/Pages/Users/types";
+import { User } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 import MainLayout from "@/Layouts/MainLayout";
 import UserTableColumn from '@/Pages/Users/addon/Columns';
@@ -7,7 +7,7 @@ import DataTable from "@/Components/DataTable";
 
 interface PageUsersProps {
     title: string;
-    users: Users[]
+    users: User[]
 }
 
 const PageUsers = ({ title, users }: PageUsersProps) => {
@@ -26,7 +26,7 @@ const PageUsers = ({ title, users }: PageUsersProps) => {
                         </Link>
                     </div>
                 </div>
-                <DataTable<Users, ColumnDef<Users>> columns={UserTableColumn} data={users} querySearch={"nim"} />
+                <DataTable<User, ColumnDef<User>> columns={UserTableColumn} data={users} querySearch={"nim"} />
             </div>
         </MainLayout>
     );

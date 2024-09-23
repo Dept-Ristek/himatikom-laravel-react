@@ -32,4 +32,9 @@ class Kepengurusan extends Model
     {
         return $this->hasMany(Pengurus::class);
     }
+
+    public function proker(): HasMany
+    {
+        return $this->hasMany(Proker::class);
+    }
 }

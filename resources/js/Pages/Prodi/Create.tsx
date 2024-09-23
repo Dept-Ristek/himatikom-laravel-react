@@ -3,13 +3,11 @@ import { Input } from "@/Components/ui/input";
 import { Transition } from "@headlessui/react";
 import { Button } from "@/Components/ui/button";
 import { FormEventHandler } from "react";
-import MainLayout from "@/Layouts/MainLayout";
 import { Label } from "@/components/ui/label";
-interface PageCreateProdiProps {
-    title: string;
-}
-const PageCreateProdi = ({ title }: PageCreateProdiProps) => {
-    const { data, setData, post, errors, processing, recentlySuccessful } = useForm<{ name: string }>({
+import MainLayout from "@/Layouts/MainLayout";
+import { Prodi } from "@/types";
+const PageCreateProdi = ({ title }: { title: string }) => {
+    const { data, setData, post, errors, processing, recentlySuccessful } = useForm<Prodi>({
         name: "",
     });
     const submit: FormEventHandler = (e) => {

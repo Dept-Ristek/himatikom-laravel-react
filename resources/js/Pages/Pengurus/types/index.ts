@@ -6,5 +6,5 @@ export interface Pengurus {
     user: Users;
     kepengurusan: Kepengurusans;
     level: string;
-    is_active: boolean;
+    is_active?: boolean;
 }

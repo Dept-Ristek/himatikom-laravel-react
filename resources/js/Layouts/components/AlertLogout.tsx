@@ -20,7 +20,7 @@ const AlertLogout = () => {
             <AlertDialogFooter>
                 <AlertDialogCancel>Batal</AlertDialogCancel>
                 <Link method="post" href={route('logout')} as="button">
-                    <AlertDialogAction>Ya, Logout</AlertDialogAction>
+                    <AlertDialogAction className="w-full">Ya, Logout</AlertDialogAction>
                 </Link>
             </AlertDialogFooter>
         </AlertDialogContent>

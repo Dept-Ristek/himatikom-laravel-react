@@ -74,12 +74,12 @@ const CommandContent = ({ className }: CommandContentProps) => {
                                 Struktur Kepanitiaan
                             </CommandItem>
                         </Link>
-                        {/* <Link href={route('dashboard')}>
-                            <CommandItem className={url == 'dashboard' ? "bg-white text-black" : "text-white"}>
+                        <Link href={route('admin.proker.index')}>
+                            <CommandItem className={url == 'admin.proker.index' ? "bg-white text-black" : "text-white"}>
                                 <BookMarkedIcon size={20} className="mr-2" />
                                 Program Kerja | Agenda
                             </CommandItem>
-                        </Link> */}
+                        </Link>
                     </CommandGroup> : <></>}
                 <CommandSeparator />
                 <CommandGroup heading="Settings">

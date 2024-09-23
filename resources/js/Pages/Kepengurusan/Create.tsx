@@ -1,24 +1,16 @@
 import { Head, Link, useForm } from "@inertiajs/react";
 import { Input } from "@/Components/ui/input";
-import { Label } from "@/Components/ui/label";
+import { Label } from "@/components/ui/label";
 import { Transition } from "@headlessui/react";
 import { Button } from "@/Components/ui/button";
 import { Textarea } from "@/Components/ui/textarea";
+import { Kepengurusan } from "@/types";
 import React, { FormEventHandler, useState } from "react";
 import MainLayout from "@/Layouts/MainLayout";
 import Image from "@/Components/Image";
-interface PageCreateKepengurusanProps {
-    title: string;
-}
-interface KepengurusanFormType {
-    name: string;
-    description: string;
-    periode: string;
-    poster: File | null;
-}
 
-const PageCreateKepengurusan = ({ title }: PageCreateKepengurusanProps) => {
-    const { data, setData, post, errors, processing, recentlySuccessful } = useForm<KepengurusanFormType>({
+const PageCreateKepengurusan = ({ title }: { title: string }) => {
+    const { data, setData, post, errors, processing, recentlySuccessful } = useForm<Kepengurusan>({
         name: "",
         description: "",
         periode: "",
@@ -67,7 +59,10 @@ const PageCreateKepengurusan = ({ title }: PageCreateKepengurusanProps) => {
                     </div>
                     <div className="flex flex-row justify-between items-start">
                         <div className="bg-slate-400 rounded-md w-[200px] h-[350px] border border-slate-400">
-                            <Image src={image} alt="Preview Poster Image" className="rounded-md border-slate-400 w-[200px] h-[350px] object-cover" />
+                            {
+                                image &&
+                                <Image src={typeof image == 'string' ? image : URL.createObjectURL(image)} alt="Preview Poster Image" className="rounded-md border-slate-400 w-[200px] h-[350px] object-cover" />
+                            }
                         </div>
                         <div className="flex flex-row items-center gap-2">
                             <Link href={route('admin.kepengurusan.index')}>

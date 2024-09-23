@@ -14,10 +14,10 @@ import {
     AlertDialogTrigger,
 } from "@/Components/ui/alert-dialog";
 import { Link } from "@inertiajs/react";
-import { Kepanitiaans } from "@/Pages/Kepanitiaan/types";
+import { Kepanitiaan } from "@/types";
 import DialogDeleteKepanitiaan from "@/Pages/Kepanitiaan/addon/DialogDelete";
 
-const KepanitiaanTableColumn: ColumnDef<Kepanitiaans>[] = [
+const KepanitiaanTableColumn: ColumnDef<Kepanitiaan>[] = [
     {
         accessorKey: 'name',
         header: ({ column }) => {

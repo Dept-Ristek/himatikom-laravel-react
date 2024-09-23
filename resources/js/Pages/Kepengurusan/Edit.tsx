@@ -1,7 +1,7 @@
-import { Kepengurusans } from "@/Pages/Kepengurusan/types";
+import { Kepengurusan } from "@/types";
 import { Head, Link, useForm } from "@inertiajs/react";
 import { Input } from "@/Components/ui/input";
-import { Label } from "@/Components/ui/label";
+import { Label } from "@/components/ui/label";
 import { Transition } from "@headlessui/react";
 import { Button } from "@/Components/ui/button";
 import { Textarea } from "@/Components/ui/textarea";
@@ -11,11 +11,11 @@ import Image from "@/Components/Image";
 
 interface PageEditKepengurusanProps {
     title: string;
-    kepengurusan: Kepengurusans
+    kepengurusan: Kepengurusan
 }
 
 const PageEditKepengurusan = ({ title, kepengurusan }: PageEditKepengurusanProps) => {
-    const { data, setData, post, errors, processing, recentlySuccessful } = useForm<Kepengurusans>({
+    const { data, setData, post, errors, processing, recentlySuccessful } = useForm<Kepengurusan>({
         name: kepengurusan.name,
         description: kepengurusan.description,
         periode: kepengurusan.periode,

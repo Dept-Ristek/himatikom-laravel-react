@@ -1,9 +1,8 @@
-import { Users } from "@/Pages/Users/types";
-import { Kepengurusans } from "@/Pages/Kepengurusan/types";
-import { Head, Link, router, useForm } from "@inertiajs/react";
+import { Kepengurusan, User, Pengurus } from "@/types";
+import { Head, Link, useForm } from "@inertiajs/react";
 import { Transition } from "@headlessui/react";
 import { Button } from "@/Components/ui/button";
-import { FormEventHandler, useEffect, useRef, useState } from "react";
+import { FormEventHandler, useState } from "react";
 import {
     CaretSortIcon,
     CheckIcon
@@ -28,18 +27,12 @@ import MainLayout from "@/Layouts/MainLayout";
 
 interface PageCreatePengurusProps {
     title: string;
-    users: Users[];
-    kepengurusans: Kepengurusans[]
-}
-
-interface PengurusFormType {
-    user_id: string;
-    kepengurusan_id: string;
-    level: string;
+    users: User[];
+    kepengurusans: Kepengurusan[]
 }
 
 const PageCreatePengurus = ({ title, users, kepengurusans }: PageCreatePengurusProps) => {
-    const { data, setData, post, errors, processing, recentlySuccessful } = useForm<PengurusFormType>({
+    const { data, setData, post, errors, processing, recentlySuccessful } = useForm<Pengurus>({
         user_id: "",
         kepengurusan_id: "",
         level: "",

@@ -1,8 +1,8 @@
-import MainLayout from "@/Layouts/MainLayout";
 import { Head, Link } from "@inertiajs/react";
-import { Pengurus } from "@/Pages/Pengurus/types";
-import DataTable from "@/Components/DataTable";
+import { Pengurus } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
+import MainLayout from "@/Layouts/MainLayout";
+import DataTable from "@/Components/DataTable";
 import PengurusTableColumn from "@/Pages/Pengurus/addon/Columns";
 
 interface PagePengurusProps {

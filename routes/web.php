@@ -5,6 +5,7 @@ use App\Http\Controllers\KepengurusanController;
 use App\Http\Controllers\PengurusController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProkerController;
 use App\Http\Controllers\UserController;
 use App\Models\Pengurus;
 use Illuminate\Foundation\Application;
@@ -89,6 +90,19 @@ Route::prefix('admin')->name('admin.')->group(function() {
         Route::put('/kepanitiaan/update/{kepanitiaan}', 'update')->name('kepanitiaan.update');
 
         Route::delete('/kepanitiaan/delete/{kepantiaan}', 'destroy')->name('kepanitiaan.delete');
+    });
+
+    Route::controller(ProkerController::class)->middleware(['auth'])->group(function() {
+        Route::get('/proker', 'index')->name('proker.index');
+        Route::get('/proker/create', 'create')->name('proker.create');
+        Route::get('/proker/edit/{proker}', 'edit')->name('proker.edit');
+        Route::get('/proker/detail/{proker}', 'show')->name('proker.detail');
+
+        Route::post('/proker/store', 'store')->name('proker.store');
+
+        Route::put('/proker/update/{proker}', 'update')->name('proker.update');
+
+        Route::delete('/proker/delete/{proker}', 'destroy')->name('proker.delete');
     });
 });
 

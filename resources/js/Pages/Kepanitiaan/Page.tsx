@@ -1,4 +1,4 @@
-import { Kepanitiaans } from "@/Pages/Kepanitiaan/types";
+import { Kepanitiaan } from "@/types";
 import { Head, Link } from "@inertiajs/react";
 import { ColumnDef } from "@tanstack/react-table";
 import MainLayout from "@/Layouts/MainLayout";
@@ -7,7 +7,7 @@ import DataTable from "@/Components/DataTable";
 
 interface PageKepanitiaanProps {
     title: string;
-    kepanitiaans: Kepanitiaans[]
+    kepanitiaans: Kepanitiaan[]
 }
 
 const PageKepanitiaan = ({ title, kepanitiaans }: PageKepanitiaanProps) => {
@@ -23,7 +23,7 @@ const PageKepanitiaan = ({ title, kepanitiaans }: PageKepanitiaanProps) => {
                         </Link>
                     </div>
                 </div>
-                <DataTable<Kepanitiaans, ColumnDef<Kepanitiaans>> columns={KepanitiaanTableColumn} data={kepanitiaans} querySearch="name" />
+                <DataTable<Kepanitiaan, ColumnDef<Kepanitiaan>> columns={KepanitiaanTableColumn} data={kepanitiaans} querySearch="name" />
             </div>
         </MainLayout>
     );

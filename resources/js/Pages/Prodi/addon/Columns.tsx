@@ -11,16 +11,12 @@ import {
     DropdownMenuTrigger,
 } from "@/Components/ui/dropdown-menu";
 import {
-    Dialog,
-    DialogTrigger,
-} from "@/components/ui/dialog";
-import {
     AlertDialog,
     AlertDialogTrigger,
 } from "@/Components/ui/alert-dialog";
-import { Prodi } from "@/Pages/Prodi/types";
-import DialogDeleteProdi from "@/Pages/Prodi/addon/DialogDelete";
+import { Prodi } from "@/types";
 import { Link } from "@inertiajs/react";
+import DialogDeleteProdi from "@/Pages/Prodi/addon/DialogDelete";
 const ProdiTableColumns: ColumnDef<Prodi>[] = [
     {
         accessorKey: "name",

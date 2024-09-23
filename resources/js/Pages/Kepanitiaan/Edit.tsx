@@ -1,20 +1,20 @@
 import { Head, Link, useForm } from "@inertiajs/react";
-import MainLayout from "@/Layouts/MainLayout";
 import { FormEventHandler } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/Components/ui/input";
 import { Button } from "@/Components/ui/button";
 import { Transition } from "@headlessui/react";
 import { Textarea } from '@/Components/ui/textarea';
-import { Kepanitiaans } from "@/Pages/Kepanitiaan/types";
+import { Kepanitiaan } from "@/types";
+import MainLayout from "@/Layouts/MainLayout";
 
 interface PageCreateKepengurusanProps {
     title: string;
-    kepanitiaan: Kepanitiaans
+    kepanitiaan: Kepanitiaan
 }
 
 const PageEditKepanitiaan = ({ title, kepanitiaan }: PageCreateKepengurusanProps) => {
-    const { data, setData, put, errors, processing, recentlySuccessful } = useForm<Kepanitiaans>({
+    const { data, setData, put, errors, processing, recentlySuccessful } = useForm<Kepanitiaan>({
         name: kepanitiaan.name,
         description: kepanitiaan.description,
     });

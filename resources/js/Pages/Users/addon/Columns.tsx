@@ -15,9 +15,9 @@ import {
     AlertDialogTrigger,
 } from "@/Components/ui/alert-dialog";
 import { Link } from "@inertiajs/react";
-import { Users } from "@/Pages/Users/types";
+import { User } from "@/types";
 
-const UserTableColumn: ColumnDef<Users>[] = [
+const UserTableColumn: ColumnDef<User>[] = [
     {
         accessorKey: "nim",
         header: ({ column }) => {

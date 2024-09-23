@@ -45,11 +45,7 @@ class ProdiController extends Controller
             $validated['slug'] = Str::slug($validated['name']);
             $prodi = Prodi::create($validated);
         });
-        return Redirect::route('admin.prodi.index')->with(['message' => [
-            'variant' => 'default',
-            'title' => 'Tambah data program studi',
-            'description' => date_format(now(), "D, d M Y") . " Telah berhasil menambahkan data program studi!"
-        ]]);
+        return Redirect::route('admin.prodi.index');
     }
 
     /**

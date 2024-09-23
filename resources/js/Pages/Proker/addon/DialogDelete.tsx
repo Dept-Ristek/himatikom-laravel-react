@@ -8,9 +8,8 @@ import {
     AlertDialogTitle,
 } from "@/Components/ui/alert-dialog";
 import { Link } from '@inertiajs/react';
-import { Kepanitiaan } from "@/types";
-
-const DialogDeleteKepanitiaan = ({ kepanitiaan }: { kepanitiaan: Kepanitiaan }) => {
+import { Proker } from '@/types';
+const DialogDeleteProker = ({ proker }: { proker: Proker }) => {
     return (
         <AlertDialogContent>
             <AlertDialogHeader>
@@ -21,11 +20,11 @@ const DialogDeleteKepanitiaan = ({ kepanitiaan }: { kepanitiaan: Kepanitiaan }) 
             </AlertDialogHeader>
             <AlertDialogFooter>
                 <AlertDialogCancel>Batal</AlertDialogCancel>
-                <Link href={route('admin.kepanitiaan.delete', kepanitiaan.id)} method="delete" as="button">
+                <Link href={route('admin.proker.delete', proker.id)} method="delete" as="button">
                     <AlertDialogAction className="bg-red-600">Hapus</AlertDialogAction>
                 </Link>
             </AlertDialogFooter>
         </AlertDialogContent>
     );
 }
-export default DialogDeleteKepanitiaan;
+export default DialogDeleteProker;

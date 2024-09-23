@@ -1,5 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Pengurus } from "@/Pages/Pengurus/types";
+import { Pengurus } from "@/types";
 import { Button } from "@/Components/ui/button";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import {

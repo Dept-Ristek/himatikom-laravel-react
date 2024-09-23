@@ -14,11 +14,10 @@ import {
     AlertDialog,
     AlertDialogTrigger,
 } from "@/Components/ui/alert-dialog";
+import { Proker } from "@/types";
 import { Link } from "@inertiajs/react";
-import { Kepengurusan } from '@/types';
-import Image from "@/Components/Image";
-import DialogDeleteKepengurusan from "@/Pages/Kepengurusan/addon/DialogDelete";
-const KepengurusanTableColumn: ColumnDef<Kepengurusan>[] = [
+import DialogDeleteProker from "@/Pages/Proker/addon/DialogDelete";
+const ProkerTableColumn: ColumnDef<Proker>[] = [
     {
         accessorKey: "name",
         header: ({ column }) => {
@@ -27,19 +26,43 @@ const KepengurusanTableColumn: ColumnDef<Kepengurusan>[] = [
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Name
+                    Nama
                     <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
             )
         },
     },
     {
-        accessorKey: "poster",
-        header: "Poster",
-        cell: ({ row }) => {
-            const kepengurusan = row.original
+        accessorKey: "kepengurusan.name",
+        header: ({ column }) => {
             return (
-                <Image src={kepengurusan.poster as string} className="w-[150px] h-[200px] object-cover rounded-md" />
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Departement
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
+    },
+    {
+        accessorKey: "is_proker",
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Proker/Agenda
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
+        cell: ({ row }) => {
+            const proker = row.original;
+            return (
+                <h1 className="text-md text-center font-bold">{proker.is_proker ? "Proker" : "Agenda"}</h1>
             );
         }
     },
@@ -47,7 +70,7 @@ const KepengurusanTableColumn: ColumnDef<Kepengurusan>[] = [
         id: "actions",
         header: "Aksi",
         cell: ({ row }) => {
-            const kepengurusan = row.original
+            const proker = row.original
             return (
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -59,7 +82,7 @@ const KepengurusanTableColumn: ColumnDef<Kepengurusan>[] = [
                     <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <Link href={route('admin.kepengurusan.edit', kepengurusan.id)}>
+                        <Link href={route('admin.proker.edit', proker.id)}>
                             <DropdownMenuItem>
                                 Edit
                             </DropdownMenuItem>
@@ -67,7 +90,7 @@ const KepengurusanTableColumn: ColumnDef<Kepengurusan>[] = [
                         <DropdownMenuItem asChild>
                             <AlertDialog>
                                 <AlertDialogTrigger className="text-sm text-left rounded-md w-full p-2 hover:bg-slate-100">Hapus</AlertDialogTrigger>
-                                <DialogDeleteKepengurusan kepengurusan={kepengurusan} />
+                                <DialogDeleteProker proker={proker} />
                             </AlertDialog>
                         </DropdownMenuItem>
                     </DropdownMenuContent>
@@ -75,5 +98,5 @@ const KepengurusanTableColumn: ColumnDef<Kepengurusan>[] = [
             )
         },
     },
-];
-export default KepengurusanTableColumn;
+]
+export default ProkerTableColumn;

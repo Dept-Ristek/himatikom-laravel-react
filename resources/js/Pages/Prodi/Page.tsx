@@ -1,16 +1,11 @@
-import { Prodi } from "@/Pages/Prodi/types";
+import { Prodi } from "@/types";
 import { Head, Link } from "@inertiajs/react";
 import { ColumnDef } from "@tanstack/react-table";
 import MainLayout from "@/Layouts/MainLayout";
 import DataTable from "@/Components/DataTable";
 import ProdiTableColumns from "@/Pages/Prodi/addon/Columns";
+const PageProdi = ({ title, prodis }: { title: string; prodis: Prodi[]; }) => {
 
-interface PageProdiProps {
-    title: string;
-    prodis: Prodi[];
-}
-
-const PageProdi = ({ title, prodis }: PageProdiProps) => {
     return (
         <MainLayout>
             <Head title={title} />

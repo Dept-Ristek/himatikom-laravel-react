@@ -1,30 +1,17 @@
 import { Head, Link, useForm } from "@inertiajs/react";
 import { Input } from "@/Components/ui/input";
-import { Label } from "@/Components/ui/label";
+import { Label } from "@/components/ui/label";
 import { Transition } from "@headlessui/react";
 import { Button } from "@/Components/ui/button";
 import React, { FormEventHandler, useState } from "react";
 import MainLayout from "@/Layouts/MainLayout";
-import Image from "@/Components/Image";
-import { Users } from "@/Pages/Users/types";
+import { User } from "@/types";
 
-interface PageCreateUsersProps {
-    title: string;
-    user: Users;
-}
-interface UserFormType {
-    nim: string;
-    name: string;
-    email: string;
-    password?: string;
-    repeat_password?: string;
-}
-
-const PageCreateUsers = ({ title, user }: PageCreateUsersProps) => {
-    const { data, setData, put, errors, processing, recentlySuccessful } = useForm<UserFormType>({
-        nim: user.nim,
-        name: user.name,
-        email: user.email,
+const PageCreateUsers = ({ title, user }: { title: string; user: User }) => {
+    const { data, setData, put, errors, processing, recentlySuccessful } = useForm<User>({
+        nim: user?.nim,
+        name: user?.name,
+        email: user?.email,
         password: "",
         repeat_password: "",
     });

@@ -1,4 +1,4 @@
-import { Kepengurusans } from "@/Pages/Kepengurusan/types";
+import { Kepengurusan } from "@/types";
 import {
     AlertDialogAction,
     AlertDialogCancel,
@@ -10,7 +10,7 @@ import {
 } from "@/Components/ui/alert-dialog";
 import { Link } from '@inertiajs/react';
 
-const DialogDeleteKepengurusan = ({ kepengurusan }: { kepengurusan: Kepengurusans }) => {
+const DialogDeleteKepengurusan = ({ kepengurusan }: { kepengurusan: Kepengurusan }) => {
     return (
         <AlertDialogContent>
             <AlertDialogHeader>

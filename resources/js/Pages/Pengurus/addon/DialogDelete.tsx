@@ -1,4 +1,4 @@
-import { Pengurus } from "@/Pages/Pengurus/types";
+import { Pengurus } from "@/types";
 import {
     AlertDialogAction,
     AlertDialogCancel,

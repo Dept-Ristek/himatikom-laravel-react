@@ -1,13 +1,13 @@
 import { Head, Link, useForm } from "@inertiajs/react";
 import { Input } from "@/Components/ui/input";
-import { Label } from "@/Components/ui/label";
+import { Label } from "@/components/ui/label";
 import { Transition } from "@headlessui/react";
 import { Button } from "@/Components/ui/button";
 import { FormEventHandler } from "react";
-import { Prodi } from "@/Pages/Prodi/types";
+import { Prodi } from "@/types";
 import MainLayout from "@/Layouts/MainLayout";
 const PageEditProdi = ({ title, prodi }: { title: string, prodi: Prodi }) => {
-    const { data, setData, put, errors, processing, recentlySuccessful } = useForm({
+    const { data, setData, put, errors, processing, recentlySuccessful } = useForm<Prodi>({
         name: prodi.name
     });
     const submit: FormEventHandler = (e) => {

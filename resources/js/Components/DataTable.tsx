@@ -58,7 +58,7 @@ const DataTable = <TData, TValue>({
     });
     return (
         <div>
-            <div className="flex items-center py-4">
+            <div className="flex items-center py-4 gap-1">
                 <Input
                     placeholder={`Filter ${querySearch}...`}
                     value={(table.getColumn(querySearch)?.getFilterValue() as string) ?? ""}
