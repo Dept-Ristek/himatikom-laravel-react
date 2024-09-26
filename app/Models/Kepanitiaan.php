@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Kepanitiaan extends Model
 {
-    use HasFactory, HasUuids, SoftDeletes;
+    use HasFactory, HasUuids, SoftDeletes, HasFactory;
 
     protected $fillable = [
         'name',
@@ -24,13 +25,8 @@ class Kepanitiaan extends Model
         'deleted_at',
     ];
 
-    public function prokers(): BelongsToMany
+    public function kepanitiaan_proker(): HasMany
     {
-        return $this->belongsToMany(Proker::class, 'kepanitiaan_prokers');
-    }
-
-    public function users(): BelongsToMany
-    {
-        return $this->belongsToMany(User::class, 'kepanitiaan_prokers');
+        return $this->hasMany(KepanitiaanProker::class);
     }
 }

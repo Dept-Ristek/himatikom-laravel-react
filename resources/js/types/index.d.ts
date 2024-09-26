@@ -30,10 +30,10 @@ export interface Proker {
     name: string;
     slug?: string;
     is_proker: boolean;
-    schedule: Date;
+    schedule: Date | string | number | undefined;
     need_to_register?: boolean;
-    start_register?: Date | undefined;
-    end_register?: Date | undefined;
+    start_register?: Date | string | number | undefined;
+    end_register?: Date | string | number | undefined;
     kepengurusan_id?: string;
     kepengurusan?: Kepengurusan;
 }
@@ -54,6 +54,14 @@ export interface Kepanitiaan {
     name: string;
     slug?: string;
     description: string;
+}
+
+export interface KepanitiaanProker {
+    id?: string;
+    proker_id: string;
+    kepanitiaan_id: string;
+    proker?: Proker;
+    kepanitiaan?: Kepanitiaan;
 }
 
 export type PageProps<

@@ -20,7 +20,7 @@ class ProdiController extends Controller
     public function index(): Response
     {
         return Inertia::render('Prodi/Page', [
-            'title' => 'HIMATIKOM POLSUB | Program Studi',
+            'title' => 'Program Studi',
             'prodis' => Prodi::all(['id', 'name', 'slug']),
         ]);
     }
@@ -31,7 +31,7 @@ class ProdiController extends Controller
     public function create(): Response
     {
         return Inertia::render('Prodi/Create', [
-            'title' => 'HIMATIKOM POLSUB | Tambah Program Studi',
+            'title' => 'Tambah Program Studi',
         ]);
     }
 
@@ -62,7 +62,7 @@ class ProdiController extends Controller
     public function edit(Prodi $prodi): Response
     {
         return Inertia::render('Prodi/Edit', [
-            'title' => 'HIMATIKOM POLSUB | Edit Program Studi',
+            'title' => 'Edit Program Studi',
             'prodi' => $prodi
         ]);
     }

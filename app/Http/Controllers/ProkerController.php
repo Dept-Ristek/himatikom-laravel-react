@@ -6,7 +6,7 @@ use App\Http\Requests\ProkerStoreRequest;
 use App\Http\Requests\ProkerUpdateRequest;
 use App\Models\Kepengurusan;
 use App\Models\Proker;
-use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -21,7 +21,7 @@ class ProkerController extends Controller
     public function index(): Response
     {
         return Inertia::render('Proker/Page', [
-            'title' => 'HIMATIKOM POLSUB | Proker dan Agenda',
+            'title' => ' Proker dan Agenda',
             'prokers' => Proker::with('kepengurusan')->get(),
         ]);
     }
@@ -32,7 +32,7 @@ class ProkerController extends Controller
     public function create()
     {
         return Inertia::render('Proker/Create', [
-            'title' => 'HIMATIKOM POLSUB | Tambah Proker dan Agenda',
+            'title' => ' Tambah Proker dan Agenda',
             'kepengurusans' => Kepengurusan::all(),
         ]);
     }
@@ -44,6 +44,15 @@ class ProkerController extends Controller
     {
         DB::transaction(function() use($request) {
             $validated = $request->validated();
+            $validated['schedule'] = Carbon::parse($request->schedule)->setTimezone('Asia/Jakarta');
+            if ($request->need_to_register) {
+                $validated['start_register'] = Carbon::parse($request->start_register)->setTimezone('Asia/Jakarta');
+                $validated['end_register'] = Carbon::parse($request->end_register)->setTimezone('Asia/Jakarta');
+            } else {
+                $validated['start_register'] = null;
+                $validated['end_register'] = null;
+            }
+            $validated['kepengurusan_id'] = $request->kepengurusan_id;
             $validated['slug'] = Str::slug($validated['name']);
             $validated['status'] = "scheduled";
             $proker = Proker::create($validated);
@@ -57,7 +66,7 @@ class ProkerController extends Controller
     public function show(Proker $proker)
     {
         return Inertia::render('Proker/Detail', [
-            'title' => 'HIMATIKOM POLSUB | Detail Proker dan Agenda',
+            'title' => ' Detail Proker dan Agenda',
             'proker' => $proker->with(['kepanitiaans', 'users']),
         ]);
     }
@@ -68,8 +77,9 @@ class ProkerController extends Controller
     public function edit(Proker $proker)
     {
         return Inertia::render('Proker/Edit', [
-            'title' => 'HIMATIKOM POLSUB | Edit Proker dan Agenda',
-            'proker' => $proker,
+            'title' => ' Edit Proker dan Agenda',
+            'proker' => $proker->load('kepengurusan'),
+            'kepengurusans' => Kepengurusan::all(),
         ]);
     }
 
@@ -80,8 +90,19 @@ class ProkerController extends Controller
     {
         DB::transaction(function() use($request, $proker) {
             $validated = $request->validated();
+            $validated['schedule'] = Carbon::parse($request->schedule)->setTimezone('Asia/Jakarta');
+            if ($validated['need_to_register']) {
+                $validated['start_register'] = Carbon::parse($request->start_register)->setTimezone('Asia/Jakarta');
+                $validated['end_register'] = Carbon::parse($request->end_register)->setTimezone('Asia/Jakarta');
+            } else {
+                $validated['start_register'] = null;
+                $validated['end_register'] = null;
+            }
+            $validated['kepengurusan_id'] = $request->kepengurusan_id;
             $validated['slug'] = Str::slug($validated['name']);
+            $proker->update($validated);
         });
+        return Redirect::route('admin.proker.index');
     }
 
     /**
@@ -89,6 +110,14 @@ class ProkerController extends Controller
      */
     public function destroy(Proker $proker)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $proker->delete();
+            DB::commit();
+            return Redirect::route('admin.proker.index');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return Redirect::route('admin.proker.index')->with('error', 'Terjadi kesalahan ketika menghapus data!');
+        }
     }
 }

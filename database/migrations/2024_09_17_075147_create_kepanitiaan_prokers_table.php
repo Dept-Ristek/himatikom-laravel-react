@@ -15,8 +15,6 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('proker_id')->constrained();
             $table->foreignUuid('kepanitiaan_id')->constrained();
-            $table->foreignUuid('user_id')->nullable()->constrained();
-            $table->enum('level', ['1', '2', '3'])->default('3');
             $table->timestamps();
             $table->softDeletes();
         });

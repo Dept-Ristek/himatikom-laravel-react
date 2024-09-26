@@ -22,8 +22,8 @@ class UserController extends Controller
     public function index(): Response
     {
         return Inertia::render('Users/Page', [
-            'title' => "HIMATIKOM POLSUB | Users",
-            'users' => User::all(['id', 'nim', 'name', 'email']),
+            'title' => " Users",
+            'users' => User::where('nim', '!=', '12345678')->get(),
         ]);
     }
 
@@ -33,14 +33,14 @@ class UserController extends Controller
     public function create(): Response
     {
         return Inertia::render('Users/Create', [
-            'title' => 'HIMATIKOM POLSUB | Tambah User'
+            'title' => ' Tambah User'
         ]);
     }
 
     public function import(): Response
     {
         return Inertia::render('Users/Import', [
-            'title' => 'HIMATIKOM POLSUB | Import Users',
+            'title' => ' Import Users',
         ]);
     }
 

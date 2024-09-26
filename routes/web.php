@@ -1,25 +1,26 @@
 <?php
 
 use App\Http\Controllers\KepanitiaanController;
+use App\Http\Controllers\KepanitiaanProkerController;
 use App\Http\Controllers\KepengurusanController;
 use App\Http\Controllers\PengurusController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProkerController;
 use App\Http\Controllers\UserController;
-use App\Models\Pengurus;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
+        'title' => 'Beranda',
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('front.index');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -71,13 +72,13 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::controller(PengurusController::class)->middleware(['auth'])->group(function() {
         Route::get('/pengurus', 'index')->name('pengurus.index');
         Route::get('/pengurus/create', 'create')->name('pengurus.create');
-        Route::get('/pengurus/edit/{pengurus}', 'edit')->name('pengurus.edit');
+        Route::get('/pengurus/edit/{pengurus:id}', 'edit')->name('pengurus.edit');
 
         Route::post('/pengurus/store', 'store')->name('pengurus.store');
 
-        Route::put('/pengurus/update/{pengurus}', 'update')->name('pengurus.update');
+        Route::put('/pengurus/update/{pengurus:id}', 'update')->name('pengurus.update');
 
-        Route::delete('/pengurus/delete/{pengurus}', 'destroy')->name('pengurus.delete');
+        Route::delete('/pengurus/delete/{pengurus:id}', 'destroy')->name('pengurus.delete');
     });
 
     Route::controller(KepanitiaanController::class)->middleware(['auth'])->group(function() {
@@ -95,14 +96,20 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::controller(ProkerController::class)->middleware(['auth'])->group(function() {
         Route::get('/proker', 'index')->name('proker.index');
         Route::get('/proker/create', 'create')->name('proker.create');
-        Route::get('/proker/edit/{proker}', 'edit')->name('proker.edit');
-        Route::get('/proker/detail/{proker}', 'show')->name('proker.detail');
+        Route::get('/proker/edit/{proker:id}', 'edit')->name('proker.edit');
+        Route::get('/proker/detail/{proker:id}', 'show')->name('proker.detail');
 
         Route::post('/proker/store', 'store')->name('proker.store');
 
-        Route::put('/proker/update/{proker}', 'update')->name('proker.update');
+        Route::put('/proker/update/{proker:id}', 'update')->name('proker.update');
 
-        Route::delete('/proker/delete/{proker}', 'destroy')->name('proker.delete');
+        Route::delete('/proker/delete/{proker:id}', 'destroy')->name('proker.delete');
+    });
+
+    Route::controller(KepanitiaanProkerController::class)->middleware(['auth'])->group(function() {
+        Route::get('/proker/{proker:id}/kepanitiaan/create', 'create')->name('proker.kepanitiaan.create');
+
+        Route::post('/proker/{proker:id}/kepanitiaan/store', 'store')->name('proker.kepanitiaan.store');
     });
 });
 

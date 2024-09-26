@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -36,6 +37,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 
     /**
@@ -54,5 +58,10 @@ class User extends Authenticatable
     public function pengurus(): HasOne
     {
         return $this->hasOne(Pengurus::class);
+    }
+
+    public function prokers(): BelongsToMany
+    {
+        return $this->belongsToMany(Proker::class, 'kepanitiaan_prokers');
     }
 }

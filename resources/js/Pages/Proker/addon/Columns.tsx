@@ -12,11 +12,17 @@ import {
 } from "@/Components/ui/dropdown-menu";
 import {
     AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/Components/ui/alert-dialog";
 import { Proker } from "@/types";
 import { Link } from "@inertiajs/react";
-import DialogDeleteProker from "@/Pages/Proker/addon/DialogDelete";
 const ProkerTableColumn: ColumnDef<Proker>[] = [
     {
         accessorKey: "name",
@@ -62,7 +68,60 @@ const ProkerTableColumn: ColumnDef<Proker>[] = [
         cell: ({ row }) => {
             const proker = row.original;
             return (
-                <h1 className="text-md text-center font-bold">{proker.is_proker ? "Proker" : "Agenda"}</h1>
+                <h1 className="text-md font-bold">{proker.is_proker ? "Proker" : "Agenda"}</h1>
+            );
+        }
+    },
+    {
+        accessorKey: "schedule",
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Jadwal
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
+        cell: ({ row }) => {
+            const proker = row.original;
+            return (
+                <h1 className="text-md font-bold">{Intl.DateTimeFormat('id-ID', {
+                    year: 'numeric',
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric'
+                }).format(new Date(proker?.schedule as string | Date | number))}</h1>
+            );
+        }
+    },
+    {
+        accessorKey: "schedule",
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Ada Kepanitiaan
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
+        cell: ({ row }) => {
+            const proker = row.original;
+            return (
+                <div className="flex flex-row gap-3 items-center">
+                    <h1 className="text-md font-bold">{proker.need_to_register ? "Ya" : "Tidak"}</h1>
+                    {
+                        proker.need_to_register ?
+                            <Link href={route('admin.proker.kepanitiaan.create', proker.id)} className="px-3 py-1 rounded-md bg-primary text-sm text-white">Atur Kepanitiaan</Link>
+                            :
+                            <></>
+                    }
+                </div>
             );
         }
     },
@@ -90,7 +149,20 @@ const ProkerTableColumn: ColumnDef<Proker>[] = [
                         <DropdownMenuItem asChild>
                             <AlertDialog>
                                 <AlertDialogTrigger className="text-sm text-left rounded-md w-full p-2 hover:bg-slate-100">Hapus</AlertDialogTrigger>
-                                <DialogDeleteProker proker={proker} />
+                                <AlertDialogContent>
+                                    <AlertDialogHeader>
+                                        <AlertDialogTitle>Apakah anda yakin?</AlertDialogTitle>
+                                        <AlertDialogDescription>
+                                            Menghapus data secara permanen memungkinkan anda tidak dapat mengembalikan data yang telah dihapus
+                                        </AlertDialogDescription>
+                                    </AlertDialogHeader>
+                                    <AlertDialogFooter>
+                                        <AlertDialogCancel>Batal</AlertDialogCancel>
+                                        <Link href={route('admin.proker.delete', proker.id)} method="delete" as="button">
+                                            <AlertDialogAction className="bg-red-600">Hapus</AlertDialogAction>
+                                        </Link>
+                                    </AlertDialogFooter>
+                                </AlertDialogContent>
                             </AlertDialog>
                         </DropdownMenuItem>
                     </DropdownMenuContent>

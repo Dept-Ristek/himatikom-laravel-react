@@ -22,7 +22,7 @@ import {
 } from "@/Components/ui/popover";
 import { cn } from "@/lib/utils";
 import { levels } from "@/Pages/Pengurus/types/data";
-import { Label } from "@/components/ui/label";
+import { Label } from "@/Components/ui/label";
 import MainLayout from "@/Layouts/MainLayout";
 
 interface PageCreatePengurusProps {

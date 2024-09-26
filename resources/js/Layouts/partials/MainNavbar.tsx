@@ -15,6 +15,13 @@ import {
 } from "@/Components/ui/avatar";
 import {
     AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/Components/ui/alert-dialog";
 import {
@@ -49,23 +56,42 @@ const MainNavbar = ({ user, className }: MainNavbarProps) => {
                     <DropdownMenuTrigger className='flex gap-2 items-center'>
                         <span className="text-sm hidden md:block lg:block">{user.name}</span>
                         <Avatar>
-                            <AvatarImage src={user.avatar ?? "https://github.com/shadcn.png"} alt="@shadcn" className="object-cover" />
+                            <AvatarImage src={user.avatar as string ?? "https://github.com/shadcn.png"} alt="@shadcn" className="object-cover" />
                             <AvatarFallback className="text-black">BT</AvatarFallback>
                         </Avatar>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="bg-zinc-900 dark:bg-slate-700 text-white border border-slate-700">
                         <DropdownMenuLabel>My Account</DropdownMenuLabel>
                         <DropdownMenuSeparator className="bg-slate-100" />
+                        <DropdownMenuItem>
+                            <Link href={route('front.index')}>
+                                Landing Page
+                            </Link>
+                        </DropdownMenuItem>
                         <DropdownMenuItem>Profile</DropdownMenuItem>
                         <DropdownMenuItem asChild>
                             <AlertDialog>
                                 <AlertDialogTrigger className="text-sm p-2 w-full text-left hover:text-black hover:bg-secondary rounded-md">Logout</AlertDialogTrigger>
-                                <AlertLogout key={"alert-logout-navbar"} />
+                                {/* <AlertLogout key={"alert-logout-navbar"} /> */}
+                                <AlertDialogContent>
+                                    <AlertDialogHeader>
+                                        <AlertDialogTitle>Mengakhiri Sesi?</AlertDialogTitle>
+                                        <AlertDialogDescription>
+                                            Apakah anda yakin ingin mengakhiri sesi? login dibutuhkan kembali apabila ingin memulai sesi baru
+                                        </AlertDialogDescription>
+                                    </AlertDialogHeader>
+                                    <AlertDialogFooter>
+                                        <AlertDialogCancel>Batal</AlertDialogCancel>
+                                        <Link method="post" href={route('logout')} as="button" ref={'logout'}>
+                                            <AlertDialogAction className="w-full">Ya, Logout</AlertDialogAction>
+                                        </Link>
+                                    </AlertDialogFooter>
+                                </AlertDialogContent>
                             </AlertDialog>
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
-                <Sheet>
+                <Sheet key={'main-navbar'}>
                     <SheetTrigger className="bg-zinc-900 text-white md:hidden lg:hidden">
                         <AlignJustifyIcon />
                     </SheetTrigger>

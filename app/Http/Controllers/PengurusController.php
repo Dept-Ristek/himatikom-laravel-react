@@ -21,7 +21,7 @@ class PengurusController extends Controller
     public function index(): Response
     {
         return Inertia::render('Pengurus/Page', [
-            'title' => 'HIMATIKOM POLSUB | Pengurus',
+            'title' => ' Pengurus',
             'pengurus' => Pengurus::with(['user', 'kepengurusan'])->get()
         ]);
     }
@@ -32,8 +32,8 @@ class PengurusController extends Controller
     public function create(): Response
     {
         return Inertia::render('Pengurus/Create', [
-            'title' => 'HIMATIKOM POLSUB | Tambah Pengurus',
-            'users' => User::all(),
+            'title' => ' Tambah Pengurus',
+            'users' => User::where('nim', '!=', '12345678')->get(),
             'kepengurusans' => Kepengurusan::all(),
         ]);
     }
@@ -68,8 +68,8 @@ class PengurusController extends Controller
     public function edit(Pengurus $pengurus)
     {
         return Inertia::render('Pengurus/Edit', [
-            'title' => 'HIMATIKOM POLSUB | Edit Data',
-            'pengurus' => $pengurus->with(['user', 'kepengurusan'])->first(),
+            'title' => ' Edit Data',
+            'pengurus' => $pengurus->load(['user', 'kepengurusan']),
             'users' => User::all(),
             'kepengurusans' => Kepengurusan::all()
         ]);

@@ -20,7 +20,7 @@ class KepanitiaanController extends Controller
     public function index(): Response
     {
         return Inertia::render('Kepanitiaan/Page', [
-            'title' => 'HIMATIKOM POLSUB | Struktur Kepanitiaan',
+            'title' => ' Struktur Kepanitiaan',
             'kepanitiaans' => Kepanitiaan::all(),
         ]);
     }
@@ -62,7 +62,7 @@ class KepanitiaanController extends Controller
     public function edit(Kepanitiaan $kepanitiaan)
     {
         return Inertia::render('Kepanitiaan/Edit', [
-            'title' => 'HIMATIKOM POLSUB | Edit Kepanitiaan',
+            'title' => ' Edit Kepanitiaan',
             'kepanitiaan' => $kepanitiaan
         ]);
     }

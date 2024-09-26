@@ -1,6 +1,6 @@
 import { Head, Link, useForm } from "@inertiajs/react";
 import { Input } from "@/Components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Label } from "@/Components/ui/label";
 import { Transition } from "@headlessui/react";
 import { Button } from "@/Components/ui/button";
 import { User } from "@/types";
@@ -58,7 +58,11 @@ const PageCreateUsers = ({ title }: { title: string }) => {
                     </div>
                     <div className="flex flex-row justify-between items-center">
                         <div className="bg-slate-400 rounded-full w-[150px] h-[150px]">
-                            <Image src={image} alt="Preview Avatar Image" className="rounded-full border-slate-400 w-[150px] h-[150px] object-cover" />
+                            {
+                                image &&
+                                <Image src={typeof image == 'string' ? image : URL.createObjectURL(image)} alt="Preview User Image" className="rounded-full border-slate-400 w-[150px] h-[150px] object-cover" />
+                            }
+                            {/* <Image src={image} alt="Preview Avatar Image" className="rounded-full border-slate-400 w-[150px] h-[150px] object-cover" /> */}
                         </div>
                         <div className="flex flex-row items-center gap-2">
                             <Link href={route('admin.user.index')} className="bg-red-500 p-[0.4rem] rounded-md text-sm text-white hover:bg-red-400 px-3 py-2" disabled={processing}>

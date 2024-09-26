@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use function PHPSTORM_META\map;
@@ -35,14 +36,9 @@ class Proker extends Model
         'deleted_at',
     ];
 
-    public function kepanitiaans(): BelongsToMany
+    public function kepanitiaan_proker(): HasMany
     {
-        return $this->belongsToMany(Kepanitiaan::class, 'kepanitiaan_prokers');
-    }
-
-    public function users(): BelongsToMany
-    {
-        return $this->belongsToMany(User::class, 'kepanitiaan_prokers');
+        return $this->hasMany(KepanitiaanProker::class);
     }
 
     public function kepengurusan(): BelongsTo

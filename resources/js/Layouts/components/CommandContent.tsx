@@ -20,7 +20,7 @@ import {
     BookMarkedIcon,
     BookUserIcon
 } from "lucide-react";
-import { AlertDialog, AlertDialogTrigger } from "@/Components/ui/alert-dialog";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/Components/ui/alert-dialog";
 import AlertLogout from "@/Layouts/components/AlertLogout";
 interface CommandContentProps {
     className?: string;
@@ -101,6 +101,20 @@ const CommandContent = ({ className }: CommandContentProps) => {
                                 <LogOutIcon size={20} className="mr-2" />
                                 Logout
                             </AlertDialogTrigger>
+                            <AlertDialogContent>
+                                <AlertDialogHeader>
+                                    <AlertDialogTitle>Mengakhiri Sesi?</AlertDialogTitle>
+                                    <AlertDialogDescription>
+                                        Apakah anda yakin ingin mengakhiri sesi? login dibutuhkan kembali apabila ingin memulai sesi baru
+                                    </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                    <AlertDialogCancel>Batal</AlertDialogCancel>
+                                    <Link method="post" href={route('logout')} as="button">
+                                        <AlertDialogAction className="w-full">Ya, Logout</AlertDialogAction>
+                                    </Link>
+                                </AlertDialogFooter>
+                            </AlertDialogContent>
                             <AlertLogout />
                         </AlertDialog>
                     </CommandItem>

@@ -3,7 +3,7 @@ import { Input } from "@/Components/ui/input";
 import { Transition } from "@headlessui/react";
 import { Button } from "@/Components/ui/button";
 import { FormEventHandler } from "react";
-import { Label } from "@/components/ui/label";
+import { Label } from "@/Components/ui/label";
 import MainLayout from "@/Layouts/MainLayout";
 import { Prodi } from "@/types";
 const PageCreateProdi = ({ title }: { title: string }) => {

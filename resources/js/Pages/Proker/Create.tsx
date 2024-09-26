@@ -11,7 +11,7 @@ import {
     FormEventHandler,
     useState,
 } from "react";
-import { Label } from "@/components/ui/label";
+import { Label } from "@/Components/ui/label";
 import {
     Popover,
     PopoverContent,
@@ -36,15 +36,25 @@ import { Input } from '@/Components/ui/input';
 import { Switch } from "@/Components/ui/switch";
 import { Calendar } from '@/Components/ui/calendar';
 import MainLayout from "@/Layouts/MainLayout";
+import { stringify } from "querystring";
 const PageCreateProker = ({ title, kepengurusans }: { title: string, kepengurusans: Kepengurusan[] }) => {
     const { data, setData, post, errors, processing, recentlySuccessful } = useForm<Proker>({
         name: "",
         is_proker: false,
-        schedule: new Date(),
+        schedule: "",
         need_to_register: false,
         kepengurusan_id: "",
-        start_register: undefined,
-        end_register: undefined,
+        start_register: "",
+        end_register: "",
+    });
+    const [date, setDate] = useState<{
+        schedule: Date | undefined,
+        start_register: Date | undefined,
+        end_register: Date | undefined,
+    }>({
+        schedule: new Date(),
+        start_register: new Date(),
+        end_register: new Date(),
     });
     const [label, setLabel] = useState<{
         kepengurusan_label: string | null,
@@ -57,7 +67,7 @@ const PageCreateProker = ({ title, kepengurusans }: { title: string, kepengurusa
     });
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        console.log(data);
+        // console.log(data);
         post(route('admin.proker.store'));
     };
     return (
@@ -138,7 +148,15 @@ const PageCreateProker = ({ title, kepengurusans }: { title: string, kepengurusa
                         <Label className="text-right">
                             Jadwal {data.is_proker ? "Proker" : "Agenda"}
                         </Label>
-                        <Calendar mode="single" selected={data.schedule} className="rounded-md" />
+                        <Calendar mode="single" selected={date.schedule} onSelect={(e) => {
+                            Promise.all([
+                                setData('schedule', e?.toISOString()),
+                                setDate((val) => ({
+                                    ...val,
+                                    schedule: e
+                                }))
+                            ])
+                        }} className="rounded-md" />
                     </div>
                     <div className="mb-3">
                         <Label className="text-right">
@@ -153,7 +171,29 @@ const PageCreateProker = ({ title, kepengurusans }: { title: string, kepengurusa
                         <Label className="text-right">
                             Recruitment Dimulai
                         </Label>
-                        <Calendar mode="single" selected={!data.need_to_register ? new Date() : undefined} className="rounded-md" />
+                        <Calendar mode="single" selected={date.start_register} onSelect={(e) => {
+                            Promise.all([
+                                setData('start_register', e?.toISOString()),
+                                setDate((val) => ({
+                                    ...val,
+                                    start_register: e
+                                }))
+                            ])
+                        }} className="rounded-md" />
+                    </div>
+                    <div className="mb-3" hidden={!data.need_to_register}>
+                        <Label className="text-right">
+                            Recruitment Selesai
+                        </Label>
+                        <Calendar mode="single" selected={date.end_register} onSelect={(e) => {
+                            Promise.all([
+                                setData('end_register', e?.toISOString()),
+                                setDate((val) => ({
+                                    ...val,
+                                    end_register: e
+                                }))
+                            ])
+                        }} className="rounded-md" />
                     </div>
                     <div className="flex flex-row items-center gap-2">
                         <Link href={route('admin.proker.index')} className="bg-red-500 p-[0.4rem] rounded-md text-sm text-white hover:bg-red-400 px-3 py-2">

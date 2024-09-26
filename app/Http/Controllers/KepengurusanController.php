@@ -19,7 +19,7 @@ class KepengurusanController extends Controller
     public function index(): Response
     {
         return Inertia::render('Kepengurusan/Page', [
-            'title' => 'HIMATIKOM POLSUB | Kepengurusan',
+            'title' => ' Kepengurusan',
             'kepengurusans' => Kepengurusan::all(['id', 'name', 'description', 'poster', 'periode']),
         ]);
     }
@@ -30,7 +30,7 @@ class KepengurusanController extends Controller
     public function create(): Response
     {
         return Inertia::render('Kepengurusan/Create', [
-            'title' => 'HIMATIKOM POLSUB | Tambah Kepengurusan',
+            'title' => ' Tambah Kepengurusan',
         ]);
     }
 
@@ -67,7 +67,7 @@ class KepengurusanController extends Controller
     public function edit(Kepengurusan $kepengurusan)
     {
         return Inertia::render('Kepengurusan/Edit', [
-            'title' => 'HIMATIKOM POLSUB | Edit Kepengurusan',
+            'title' => ' Edit Kepengurusan',
             'kepengurusan' => $kepengurusan
         ]);
     }
