@@ -57,7 +57,6 @@ class ProkerController extends Controller
             $validated['status'] = "scheduled";
             $proker = Proker::create($validated);
         });
-        return Redirect::route('admin.proker.index');
     }
 
     /**
@@ -102,7 +101,6 @@ class ProkerController extends Controller
             $validated['slug'] = Str::slug($validated['name']);
             $proker->update($validated);
         });
-        return Redirect::route('admin.proker.index');
     }
 
     /**

@@ -1,0 +1,22 @@
+.ql-editor > h2 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    margin-bottom: 0.5rem;
+}
+.ql-editor > p {
+    text-align: justify;
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+.ql-editor > ol > li {
+    text-align: justify;
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+.ql-editor > ul > li {
+    text-align: justify;
+    font-size: 1rem;
+    line-height: 1.5rem;
+}

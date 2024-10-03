@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProdiRequest;
+use App\Http\Requests\ProdiUpdateRequest;
 use App\Models\Prodi;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -17,6 +19,12 @@ class ProdiController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function APIGetAllData()
+    {
+
+        return Collection::make(Prodi::all());
+    }
+
     public function index(): Response
     {
         return Inertia::render('Prodi/Page', [
@@ -43,9 +51,14 @@ class ProdiController extends Controller
         DB::transaction(function() use($request) {
             $validated = $request->validated();
             $validated['slug'] = Str::slug($validated['name']);
+            if ($request->hasFile('image')) {
+                $filePath = $request->file('image')->store('prodis');
+                $validated['image'] = "/storage/$filePath";
+            } else {
+                $validated['image'] = '/icon/preview.jpg';
+            }
             $prodi = Prodi::create($validated);
         });
-        return Redirect::route('admin.prodi.index');
     }
 
     /**
@@ -70,14 +83,20 @@ class ProdiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ProdiRequest $request, Prodi $prodi)
+    public function update(ProdiUpdateRequest $request, Prodi $prodi)
     {
         DB::transaction(function() use($request, $prodi) {
             $validated = $request->validated();
             $validated['slug'] = Str::slug($validated['name']);
+            if ($request->hasFile('image')) {
+                $filePath = $request->file('image')->store('prodis');
+                $validated['image'] = "/storage/$filePath";
+            } else {
+                $validated['image'] = $prodi->image;
+            }
             $prodi->update($validated);
         });
-        return Redirect::route('admin.prodi.index');
+
     }
 
     /**

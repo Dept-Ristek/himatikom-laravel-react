@@ -4,11 +4,13 @@ import { Label } from "@/Components/ui/label";
 import { Transition } from "@headlessui/react";
 import { Button } from "@/Components/ui/button";
 import { User } from "@/types";
-import React, { FormEventHandler, useState } from "react";
+import React, { FormEventHandler, useEffect, useState } from "react";
 import MainLayout from "@/Layouts/MainLayout";
 import Image from "@/Components/Image";
+import { useToast } from "@/hooks/use-toast";
 
 const PageCreateUsers = ({ title }: { title: string }) => {
+    const { toast } = useToast();
     const { data, setData, post, errors, processing, recentlySuccessful } = useForm<User>({
         nim: "",
         name: "",
@@ -16,6 +18,24 @@ const PageCreateUsers = ({ title }: { title: string }) => {
         avatar: null,
     });
     const [image, setImage] = useState<string>("/icon/default-avatar.jpg");
+    useEffect(() => {
+        if (recentlySuccessful) {
+            toast({
+                variant: "default",
+                title: "Tambah User",
+                description: "Berhasil menambahkan data user baru!",
+            })
+            setData({
+                ...data,
+                nim: "",
+                name: "",
+                email: "",
+                avatar: null
+            });
+            setImage("/icon/default-avatar.jpg");
+        }
+    }, [recentlySuccessful])
+
     const onChangeAvatar = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             setData('avatar', e.target.files[0])
@@ -24,7 +44,7 @@ const PageCreateUsers = ({ title }: { title: string }) => {
     }
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route('admin.user.store'))
+        post(route('admin.user.store'));
     };
     return (
         <MainLayout>

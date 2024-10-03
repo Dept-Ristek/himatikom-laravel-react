@@ -1,20 +1,13 @@
 import Image from "@/Components/Image";
 import { Link, usePage } from "@inertiajs/react";
-import { AlignJustifyIcon } from "lucide-react"
+import { AlignJustifyIcon } from "lucide-react";
 import {
     Menubar,
-    MenubarCheckboxItem,
     MenubarContent,
     MenubarItem,
     MenubarLabel,
     MenubarMenu,
-    MenubarRadioGroup,
-    MenubarRadioItem,
     MenubarSeparator,
-    MenubarShortcut,
-    MenubarSub,
-    MenubarSubContent,
-    MenubarSubTrigger,
     MenubarTrigger,
 } from "@/Components/ui/menubar";
 import {
@@ -28,29 +21,28 @@ import {
     SheetClose,
     SheetContent,
     SheetDescription,
-    SheetFooter,
     SheetHeader,
     SheetTitle,
     SheetTrigger,
 } from "@/Components/ui/sheet";
-import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger,
-} from "@/Components/ui/alert-dialog";
+import axios from "axios";
+import { Prodi } from "@/types";
+import { useEffect, useState } from "react";
 
 const FrontNavbar = () => {
     const user = usePage().props.auth.user;
+    const [prodis, setProdis] = useState<Prodi[]>([]);
+
+    useEffect(() => {
+        axios.get(route('api.prodi.get')).then((response) => {
+            setProdis(response.data);
+        }).catch((error) => console.error(error))
+    }, []);
+
     return (
         <div className="bg-zinc-900 py-5 lg:px-[10rem] md:px-[10rem] px-5 flex text-white justify-between items-center">
             <div className="flex flex-row gap-[4rem] items-center">
-                <Link href={route('dashboard')}>
+                <Link href={route('v2.front.index')}>
                     <div className="flex flex-row gap-3 justify-center items-center">
                         <Image src="/icon/logo-himatikom.png" width={40} height={30} />
                         <Image src="/icon/octagram-with-border-radius.png" width={90} />
@@ -61,27 +53,45 @@ const FrontNavbar = () => {
                 <div className="hidden lg:block md:block">
                     <Menubar className="bg-transparent rounded-none border-b border-none px-2 lg:px-4">
                         <MenubarMenu>
-                            <MenubarLabel className="relative">Beranda</MenubarLabel>
+                            <MenubarLabel className="relative">
+                                <Link href={route('v2.front.index')}>
+                                    Beranda
+                                </Link>
+                            </MenubarLabel>
                         </MenubarMenu>
                         <MenubarMenu>
                             <MenubarTrigger>Tentang</MenubarTrigger>
                             <MenubarContent>
                                 <MenubarItem>
-                                    Jurusan
+                                    <Link href={route('v2.front.jurusan')}>
+                                        Jurusan
+                                    </Link>
                                 </MenubarItem>
                                 <MenubarItem>
-                                    Himpunan
+                                    <Link href={route('v2.front.himpunan')}>
+                                        Himpunan
+                                    </Link>
                                 </MenubarItem>
                             </MenubarContent>
                         </MenubarMenu>
                         <MenubarMenu>
                             <MenubarTrigger>Program</MenubarTrigger>
                             <MenubarContent>
+                                {
+                                    prodis.map((data, index) => {
+                                        return (
+                                            <Link href={`/v2/program/prodi/${data.slug}`} key={index}>
+                                                <MenubarItem key={index}>
+                                                    {data.name}
+                                                </MenubarItem>
+                                            </Link>
+                                        );
+                                    })
+                                }
                                 <MenubarItem>
-                                    D-III Sistem Informasi
-                                </MenubarItem>
-                                <MenubarItem>
-                                    D-IV Teknik Rekayasa Perangkat Lunak
+                                    <Link href={route('v2.front.proker')}>
+                                        Program Kerja
+                                    </Link>
                                 </MenubarItem>
                             </MenubarContent>
                         </MenubarMenu>
@@ -95,7 +105,7 @@ const FrontNavbar = () => {
                                     <MenubarLabel inset>{user.name}</MenubarLabel>
                                     <MenubarSeparator />
                                     <MenubarItem inset>
-                                        <Link href={route('dashboard')} as="button">
+                                        <Link href={route('admin.dashboard')} as="button">
                                             Dashboard
                                         </Link>
                                     </MenubarItem>
@@ -120,7 +130,7 @@ const FrontNavbar = () => {
                         <SheetTrigger asChild>
                             <AlignJustifyIcon />
                         </SheetTrigger>
-                        <SheetContent side={'right'} className="bg-zinc-900 w-[250px] text-white border-none">
+                        <SheetContent side={'right'} className="bg-zinc-900 w-screen text-white border-none">
                             <SheetHeader>
                                 <SheetTitle className="text-slate-300"></SheetTitle>
                                 <SheetDescription className="text-slate-300">
@@ -128,17 +138,17 @@ const FrontNavbar = () => {
                             </SheetHeader>
                             <Accordion type="single" collapsible className="w-full text-slate-300">
                                 <AccordionItem value="beranda" className="border-b-0">
-                                    <Link href={route('front.index')}>
+                                    <Link href={route('v2.front.index')}>
                                         Beranda
                                     </Link>
                                 </AccordionItem>
                                 <AccordionItem value="tentang">
                                     <AccordionTrigger>Tentang</AccordionTrigger>
                                     <AccordionContent className="flex flex-col gap-3">
-                                        <Link href={route('front.index')}>
+                                        <Link href={route('v2.front.jurusan')}>
                                             Jurusan
                                         </Link>
-                                        <Link href={route('front.index')}>
+                                        <Link href={route('v2.front.himpunan')}>
                                             Himpunan
                                         </Link>
                                     </AccordionContent>
@@ -146,16 +156,23 @@ const FrontNavbar = () => {
                                 <AccordionItem value="program">
                                     <AccordionTrigger>Program</AccordionTrigger>
                                     <AccordionContent className="flex flex-col gap-3">
-                                        <Link href={route('front.index')}>
-                                            D-III Sistem Informasi
-                                        </Link>
-                                        <Link href={route('front.index')}>
-                                            D-IV Teknik Rekayasa Perangkat Lunak
+                                        {
+                                            prodis &&
+                                            prodis.map((data, index) => {
+                                                return (
+                                                    <Link href={`/v2/program/prodi/${data.slug}`} key={index}>
+                                                        {data.name}
+                                                    </Link>
+                                                );
+                                            })
+                                        }
+                                        <Link href={route('v2.front.proker')}>
+                                            Program Kerja
                                         </Link>
                                     </AccordionContent>
                                 </AccordionItem>
                                 <AccordionItem value="berita" className="mt-4 border-b-0">
-                                    <Link href={route('front.index')}>
+                                    <Link href={route('v2.front.index')}>
                                         Berita
                                     </Link>
                                 </AccordionItem>
@@ -163,27 +180,12 @@ const FrontNavbar = () => {
                                     <AccordionItem value="akun">
                                         <AccordionTrigger>Akun</AccordionTrigger>
                                         <AccordionContent className="flex flex-col gap-3">
-                                            <Link href={route('dashboard')}>
+                                            <Link href={route('admin.dashboard')}>
                                                 Dashboard
                                             </Link>
-                                            <AlertDialog>
-                                                <AlertDialogTrigger className="text-sm w-full text-left hover:text-black hover:bg-secondary rounded-md">Logout</AlertDialogTrigger>
-                                                {/* <AlertLogout key={"alert-logout-navbar"} /> */}
-                                                <AlertDialogContent>
-                                                    <AlertDialogHeader>
-                                                        <AlertDialogTitle>Mengakhiri Sesi?</AlertDialogTitle>
-                                                        <AlertDialogDescription>
-                                                            Apakah anda yakin ingin mengakhiri sesi? login dibutuhkan kembali apabila ingin memulai sesi baru
-                                                        </AlertDialogDescription>
-                                                    </AlertDialogHeader>
-                                                    <AlertDialogFooter>
-                                                        <AlertDialogCancel>Batal</AlertDialogCancel>
-                                                        <Link method="post" href={route('logout')} as="button" ref={'logout'}>
-                                                            <AlertDialogAction className="w-full">Ya, Logout</AlertDialogAction>
-                                                        </Link>
-                                                    </AlertDialogFooter>
-                                                </AlertDialogContent>
-                                            </AlertDialog>
+                                            <Link href={route('logout')} method="post" as="buttono">
+                                                Logout
+                                            </Link>
                                         </AccordionContent>
                                     </AccordionItem>
                                     :

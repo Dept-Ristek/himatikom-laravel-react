@@ -11,6 +11,14 @@ class Prodi extends Model
     use HasFactory, HasUuids;
     protected $fillable = [
         'name',
-        'slug'
+        'slug',
+        'image',
+        'content',
+    ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 }

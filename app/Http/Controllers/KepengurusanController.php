@@ -50,7 +50,6 @@ class KepengurusanController extends Controller
             }
             $kepengurusan = Kepengurusan::create($validated);
         });
-        return Redirect::route('admin.kepengurusan.index');
     }
 
     /**
@@ -89,7 +88,6 @@ class KepengurusanController extends Controller
             }
             $kepengurusan->update($validated);
         });
-        return Redirect::route('admin.kepengurusan.index');
     }
 
     /**

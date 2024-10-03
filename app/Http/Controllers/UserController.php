@@ -61,7 +61,6 @@ class UserController extends Controller
             $user = User::create($validated);
             $user->assignRole('anggota');
         });
-        return Redirect::route('admin.user.index');
     }
 
     public function import_store(UserImportStoreRequest $request)
@@ -71,7 +70,6 @@ class UserController extends Controller
                 $user = Excel::import(new UsersImport, $request->file('file'));
             }
         });
-        return Redirect::route('admin.user.index');
     }
 
     /**
@@ -110,7 +108,6 @@ class UserController extends Controller
             }
             $user->update($data);
         });
-        return Redirect::route('admin.user.index');
     }
 
     /**

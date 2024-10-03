@@ -51,7 +51,6 @@ class PengurusController extends Controller
             $user->removeRole('anggota');
             $user->assignRole('pengurus');
         });
-        return Redirect::route('admin.pengurus.index');
     }
 
     /**
@@ -88,7 +87,6 @@ class PengurusController extends Controller
             $pengurus->user->removeRole('anggota');
             $pengurus->user->assignRole('pengurus');
         });
-        return Redirect::route('admin.pengurus.index');
     }
 
     /**

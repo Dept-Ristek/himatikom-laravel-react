@@ -24,17 +24,10 @@ import { cn } from "@/lib/utils";
 import { levels } from "@/Pages/Pengurus/types/data";
 import { Label } from "@/Components/ui/label";
 import MainLayout from "@/Layouts/MainLayout";
+import { useToast } from "@/hooks/use-toast";
 
-interface PageCreatePengurusProps {
-    title: string;
-    pengurus: Pengurus;
-    param_user: User;
-    param_kepengurusan: Kepengurusan;
-    users: User[];
-    kepengurusans: Kepengurusan[];
-}
-
-const PageCreatePengurus = ({ title, pengurus, users, kepengurusans }: PageCreatePengurusProps) => {
+const PageCreatePengurus = ({ title, pengurus, users, kepengurusans }: { title: string; pengurus: Pengurus, users: User[]; kepengurusans: Kepengurusan[] }) => {
+    const { toast } = useToast();
     const { data, setData, post, errors, processing, recentlySuccessful } = useForm<Pengurus>({
         user_id: pengurus.user_id,
         kepengurusan_id: pengurus.kepengurusan_id,
@@ -50,28 +43,15 @@ const PageCreatePengurus = ({ title, pengurus, users, kepengurusans }: PageCreat
         kepengurusan_label: pengurus?.kepengurusan?.name,
         level_label: levels[+pengurus?.level - 1]['label'],
     });
-
-    // console.log(param_user)
-    // console.log(param_kepengurusan)
-    // console.log(data)
-    console.log(pengurus)
-    // console.log(users)
-    // console.log(kepengurusans)
-    // useEffect(() => {
-    // const index_user = users.findIndex(pengurus.user_id)
-    // const index_kepengurusan = kepengurusans.findIndex(pengurus.kepengurusan_id)
-    // console.log(index_user)
-
-    //     Promise.all([
-    //         setLabel((val) => ({
-    //             ...val,
-    //             user_label: `(${index_user?.nim}) ${index_user?.name}`,
-    //             kepengurusan_label: index_kepengurusan?.name,
-    //             level_label: levels[+pengurus.level - 1]['label']
-    //         }))
-    //     ])
-    // }, [])
-
+    useEffect(() => {
+        if (recentlySuccessful) {
+            toast({
+                variant: "default",
+                title: "Edit Pengurus",
+                description: "Berhasil mengubah data pengurus!",
+            });
+        }
+    }, [recentlySuccessful]);
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
         post(route('admin.pengurus.update', pengurus.id));

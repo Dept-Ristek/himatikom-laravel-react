@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('registrations', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('kepanitiaan_proker_id')->constrained();
+            $table->foreignUuid('proker_id')->constrained();
+            $table->foreignUuid('kepanitiaan_id')->constrained();
             $table->foreignUuid('user_id')->constrained();
             $table->text('reasons')->nullable();
             $table->boolean('is_accepted')->nullable();
-            $table->enum('level', ['1', '2', '3'])->nullable()->default('3');
+            $table->enum('level', ['1', '2', '3'])->nullable()->default('3'); // ['Ketua', 'Wakil', 'Anggota']
             $table->timestamps();
             $table->softDeletes();
         });

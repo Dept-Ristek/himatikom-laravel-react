@@ -5,12 +5,7 @@ import MainLayout from "@/Layouts/MainLayout";
 import KepanitiaanTableColumn from "@/Pages/Kepanitiaan/addon/Columns";
 import DataTable from "@/Components/DataTable";
 
-interface PageKepanitiaanProps {
-    title: string;
-    kepanitiaans: Kepanitiaan[]
-}
-
-const PageKepanitiaan = ({ title, kepanitiaans }: PageKepanitiaanProps) => {
+const PageKepanitiaan = ({ title, kepanitiaans }: { title: string; kepanitiaans: Kepanitiaan[] }) => {
     return (
         <MainLayout>
             <Head title={title} />

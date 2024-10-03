@@ -2,7 +2,11 @@ import { Kepengurusan, User, Pengurus } from "@/types";
 import { Head, Link, useForm } from "@inertiajs/react";
 import { Transition } from "@headlessui/react";
 import { Button } from "@/Components/ui/button";
-import { FormEventHandler, useState } from "react";
+import {
+    FormEventHandler,
+    useEffect,
+    useState,
+} from "react";
 import {
     CaretSortIcon,
     CheckIcon
@@ -24,14 +28,10 @@ import { cn } from "@/lib/utils";
 import { levels } from "@/Pages/Pengurus/types/data";
 import { Label } from "@/Components/ui/label";
 import MainLayout from "@/Layouts/MainLayout";
+import { useToast } from "@/hooks/use-toast";
 
-interface PageCreatePengurusProps {
-    title: string;
-    users: User[];
-    kepengurusans: Kepengurusan[]
-}
-
-const PageCreatePengurus = ({ title, users, kepengurusans }: PageCreatePengurusProps) => {
+const PageCreatePengurus = ({ title, users, kepengurusans }: { title: string; users: User[]; kepengurusans: Kepengurusan[] }) => {
+    const { toast } = useToast();
     const { data, setData, post, errors, processing, recentlySuccessful } = useForm<Pengurus>({
         user_id: "",
         kepengurusan_id: "",
@@ -46,10 +46,30 @@ const PageCreatePengurus = ({ title, users, kepengurusans }: PageCreatePengurusP
         kepengurusan_label: null,
         level_label: null,
     });
+    useEffect(() => {
+        if (recentlySuccessful) {
+            toast({
+                variant: "default",
+                title: "Tambah Pengurus",
+                description: "Berhasil menambahkan data pengurus baru!",
+            });
+            setData({
+                ...data,
+                user_id: "",
+                kepengurusan_id: "",
+                level: "",
+            });
+            setLabel({
+                ...label,
+                user_label: null,
+                kepengurusan_label: null,
+                level_label: null,
+            })
+        }
+    }, [recentlySuccessful]);
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        console.log(data);
         post(route('admin.pengurus.store'));
     };
     return (

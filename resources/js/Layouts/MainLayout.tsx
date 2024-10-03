@@ -1,7 +1,7 @@
 import { usePage } from "@inertiajs/react";
 import { PropsWithChildren } from "react";
 import { User } from "@/types";
-// import { Toaster } from "@/Components/ui/toaster";
+import { Toaster } from "@/Components/ui/toaster";
 import MainNavbar from "@/Layouts/partials/MainNavbar";
 import MainSidebar from "@/Layouts/partials/MainSidebar";
 const MainLayout = ({ children }: PropsWithChildren) => {
@@ -15,7 +15,7 @@ const MainLayout = ({ children }: PropsWithChildren) => {
                 </div>
                 <div className="w-full md:max-w-full">
                     {children}
-                    {/* <Toaster /> */}
+                    <Toaster />
                 </div>
             </div>
         </section>

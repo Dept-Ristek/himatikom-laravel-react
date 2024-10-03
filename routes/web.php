@@ -1,30 +1,22 @@
 <?php
 
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FrontController;
+use App\Http\Controllers\InboxController;
 use App\Http\Controllers\KepanitiaanController;
-use App\Http\Controllers\KepanitiaanProkerController;
 use App\Http\Controllers\KepengurusanController;
 use App\Http\Controllers\PengurusController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProkerController;
 use App\Http\Controllers\UserController;
-use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'title' => 'Beranda',
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-})->name('front.index');
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', function() {
+    return Redirect::route('v2.front.index');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -32,7 +24,21 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::prefix('v2')->name('v2.')->group(function() {
+    Route::controller(FrontController::class)->group(function() {
+        Route::get('/', 'index')->name('front.index');
+        Route::get('/program/program-kerja', 'proker')->name('front.proker');
+        Route::get('/program/prodi/{prodi:slug}', 'prodi')->name('front.prodi');
+        Route::get('/tentang/himpunan', 'himpunan')->name('front.himpunan');
+        Route::get('/tentang/jurusan', 'jurusan')->name('front.jurusan');
+    });
+});
+
 Route::prefix('admin')->name('admin.')->group(function() {
+    Route::controller(DashboardController::class)->middleware(['auth'])->group(function() {
+        Route::get('/dashboard', 'index')->name('dashboard');
+    });
+
     Route::controller(ProdiController::class)->middleware(['auth'])->group(function() {
         Route::get('/prodi', 'index')->name('prodi.index');
         Route::get('/prodi/create', 'create')->name('prodi.create');
@@ -106,10 +112,18 @@ Route::prefix('admin')->name('admin.')->group(function() {
         Route::delete('/proker/delete/{proker:id}', 'destroy')->name('proker.delete');
     });
 
-    Route::controller(KepanitiaanProkerController::class)->middleware(['auth'])->group(function() {
-        Route::get('/proker/{proker:id}/kepanitiaan/create', 'create')->name('proker.kepanitiaan.create');
+    Route::controller(BlogController::class)->middleware(['auth'])->group(function() {
+        Route::get('/blog', 'index')->name('blog.index');
+        Route::get('/blog/create', 'create')->name('blog.create');
+        Route::get('/blog/edit/{blog}', 'edit')->name('blog.edit');
 
-        Route::post('/proker/{proker:id}/kepanitiaan/store', 'store')->name('proker.kepanitiaan.store');
+        Route::post('/blog/store', 'store')->name('blog.store');
+
+        Route::put('/blog/update/{blog}', 'update')->name('blog.update');
+    });
+
+    Route::controller(InboxController::class)->group(function() {
+        Route::post('/inbox/store', 'store')->name('inbox.store');
     });
 });
 

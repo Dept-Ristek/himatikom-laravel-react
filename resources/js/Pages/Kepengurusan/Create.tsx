@@ -5,11 +5,13 @@ import { Transition } from "@headlessui/react";
 import { Button } from "@/Components/ui/button";
 import { Textarea } from "@/Components/ui/textarea";
 import { Kepengurusan } from "@/types";
-import React, { FormEventHandler, useState } from "react";
+import React, { FormEventHandler, useEffect, useState } from "react";
 import MainLayout from "@/Layouts/MainLayout";
 import Image from "@/Components/Image";
+import { useToast } from "@/hooks/use-toast";
 
 const PageCreateKepengurusan = ({ title }: { title: string }) => {
+    const { toast } = useToast();
     const { data, setData, post, errors, processing, recentlySuccessful } = useForm<Kepengurusan>({
         name: "",
         description: "",
@@ -17,6 +19,23 @@ const PageCreateKepengurusan = ({ title }: { title: string }) => {
         poster: null,
     });
     const [image, setImage] = useState<string>("/icon/preview.jpg");
+    useEffect(() => {
+        if (recentlySuccessful) {
+            toast({
+                variant: "default",
+                title: "Tambah Kepengurusan",
+                description: "Berhasil menambahkan data kepengurusan baru!",
+            });
+            setData({
+                ...data,
+                name: "",
+                description: "",
+                periode: "",
+                poster: null,
+            });
+            setImage("/icon/preview.jpg");
+        }
+    }, [recentlySuccessful]);
     const onChangePoster = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             setData('poster', e.target.files[0])

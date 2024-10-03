@@ -9,6 +9,7 @@ import {
 } from "@inertiajs/react";
 import {
     FormEventHandler,
+    useEffect,
     useState,
 } from "react";
 import { Label } from "@/Components/ui/label";
@@ -36,7 +37,9 @@ import { Input } from '@/Components/ui/input';
 import { Switch } from "@/Components/ui/switch";
 import { Calendar } from '@/Components/ui/calendar';
 import MainLayout from "@/Layouts/MainLayout";
+import { useToast } from "@/hooks/use-toast";
 const PageCreateProker = ({ title, kepengurusans, proker }: { title: string, kepengurusans: Kepengurusan[], proker: Proker }) => {
+    const { toast } = useToast();
     const { data, setData, put, errors, processing, recentlySuccessful } = useForm<Proker>({
         name: proker.name,
         is_proker: proker.is_proker,
@@ -64,9 +67,17 @@ const PageCreateProker = ({ title, kepengurusans, proker }: { title: string, kep
         is_proker: data.is_proker,
         need_to_register: data.need_to_register,
     });
+    useEffect(() => {
+        if (recentlySuccessful) {
+            toast({
+                variant: "default",
+                title: `Edit ${label.is_proker ? "Program Kerja" : "Agenda"}`,
+                description: `Berhasil mengubah data ${label.is_proker ? "Program Kerja" : "Agenda"}!`,
+            });
+        }
+    }, [recentlySuccessful]);
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        // console.log(data);
         put(route('admin.proker.update', proker.id));
     };
     return (

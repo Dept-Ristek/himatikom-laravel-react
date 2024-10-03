@@ -22,7 +22,9 @@ class ProdiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string']
+            'name' => ['required', 'string'],
+            'image' => ['required', 'image', 'mimes:png,jpg,jpeg', 'max:4098'],
+            'content' => ['required'],
         ];
     }
 }

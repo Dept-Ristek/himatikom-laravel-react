@@ -18,7 +18,8 @@ import {
     BookKeyIcon,
     ShieldCheckIcon,
     BookMarkedIcon,
-    BookUserIcon
+    BookUserIcon,
+    LucideDraftingCompass,
 } from "lucide-react";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/Components/ui/alert-dialog";
 import AlertLogout from "@/Layouts/components/AlertLogout";
@@ -38,8 +39,8 @@ const CommandContent = ({ className }: CommandContentProps) => {
                 <CommandEmpty>No results found.</CommandEmpty>
                 {user.roles && user.roles == 'admin' || user.roles == 'pengurus' ?
                     <CommandGroup heading="Pengurus | Admin Menu">
-                        <Link href={route('dashboard')}>
-                            <CommandItem className={url == 'dashboard' ? "bg-white text-black" : "text-white"}>
+                        <Link href={route('admin.dashboard')}>
+                            <CommandItem className={url == 'admin.dashboard' ? "bg-white text-black" : "text-white"}>
                                 <LayoutDashboardIcon size={20} className="mr-2" />
                                 Dashboard
                             </CommandItem>
@@ -78,6 +79,12 @@ const CommandContent = ({ className }: CommandContentProps) => {
                             <CommandItem className={url == 'admin.proker.index' ? "bg-white text-black" : "text-white"}>
                                 <BookMarkedIcon size={20} className="mr-2" />
                                 Program Kerja | Agenda
+                            </CommandItem>
+                        </Link>
+                        <Link href={route('admin.blog.index')}>
+                            <CommandItem className={url == 'admin.blog.index' ? "bg-white text-black" : "text-white"}>
+                                <LucideDraftingCompass size={20} className="mr-2" />
+                                Berita
                             </CommandItem>
                         </Link>
                     </CommandGroup> : <></>}

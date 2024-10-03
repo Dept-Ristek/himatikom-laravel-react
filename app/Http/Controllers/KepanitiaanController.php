@@ -45,7 +45,6 @@ class KepanitiaanController extends Controller
             $validated['slug'] = Str::slug($validated['name']);
             $kepanitiaan = Kepanitiaan::create($validated);
         });
-        return Redirect::route('admin.kepanitiaan.index');
     }
 
     /**
@@ -77,7 +76,6 @@ class KepanitiaanController extends Controller
             $validated['slug'] = Str::slug($validated['name']);
             $kepanitiaan->update($validated);
         });
-        return Redirect::route('admin.kepanitiaan.index');
     }
 
     /**

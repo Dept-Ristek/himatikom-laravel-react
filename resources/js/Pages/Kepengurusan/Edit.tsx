@@ -5,16 +5,14 @@ import { Label } from "@/Components/ui/label";
 import { Transition } from "@headlessui/react";
 import { Button } from "@/Components/ui/button";
 import { Textarea } from "@/Components/ui/textarea";
-import React, { FormEventHandler, useState } from "react";
+import React, { FormEventHandler, useEffect, useState } from "react";
 import MainLayout from "@/Layouts/MainLayout";
 import Image from "@/Components/Image";
+import { useToast } from "@/hooks/use-toast";
 
-interface PageEditKepengurusanProps {
-    title: string;
-    kepengurusan: Kepengurusan
-}
 
-const PageEditKepengurusan = ({ title, kepengurusan }: PageEditKepengurusanProps) => {
+const PageEditKepengurusan = ({ title, kepengurusan }: { title: string; kepengurusan: Kepengurusan }) => {
+    const { toast } = useToast();
     const { data, setData, post, errors, processing, recentlySuccessful } = useForm<Kepengurusan>({
         name: kepengurusan.name,
         description: kepengurusan.description,
@@ -23,11 +21,19 @@ const PageEditKepengurusan = ({ title, kepengurusan }: PageEditKepengurusanProps
         _method: "PUT",
     });
     const [image, setImage] = useState<File | string | null>(kepengurusan.poster);
+    useEffect(() => {
+        if (recentlySuccessful) {
+            toast({
+                variant: "default",
+                title: "Edit Kepengurusan",
+                description: "Berhasil mengubah data kepengurusan!",
+            })
+        }
+    }, [recentlySuccessful])
     const onChangePoster = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
             setData('poster', e.target.files[0])
             setImage(e.target.files[0])
-            // console.log(data.poster);
         }
     }
     const submit: FormEventHandler = (e) => {

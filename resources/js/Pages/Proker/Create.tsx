@@ -9,6 +9,7 @@ import {
 } from "@inertiajs/react";
 import {
     FormEventHandler,
+    useEffect,
     useState,
 } from "react";
 import { Label } from "@/Components/ui/label";
@@ -36,8 +37,9 @@ import { Input } from '@/Components/ui/input';
 import { Switch } from "@/Components/ui/switch";
 import { Calendar } from '@/Components/ui/calendar';
 import MainLayout from "@/Layouts/MainLayout";
-import { stringify } from "querystring";
+import { useToast } from "@/hooks/use-toast";
 const PageCreateProker = ({ title, kepengurusans }: { title: string, kepengurusans: Kepengurusan[] }) => {
+    const { toast } = useToast();
     const { data, setData, post, errors, processing, recentlySuccessful } = useForm<Proker>({
         name: "",
         is_proker: false,
@@ -65,9 +67,40 @@ const PageCreateProker = ({ title, kepengurusans }: { title: string, kepengurusa
         is_proker: false,
         need_to_register: false,
     });
+    useEffect(() => {
+        if (recentlySuccessful) {
+            toast({
+                variant: "default",
+                title: `Tambah ${label.is_proker ? "Program Kerja" : "Agenda"}`,
+                description: `Berhasil menambahkan data ${label.is_proker ? "Program Kerja" : "Agenda"} baru!`,
+            });
+            setData({
+                ...data,
+                name: "",
+                is_proker: false,
+                schedule: "",
+                need_to_register: false,
+                kepengurusan_id: "",
+                start_register: "",
+                end_register: "",
+            });
+            setDate({
+                ...date,
+                schedule: new Date(),
+                start_register: new Date(),
+                end_register: new Date(),
+            });
+            setLabel({
+                ...label,
+                kepengurusan_label: null,
+                is_proker: false,
+                need_to_register: false,
+            });
+        }
+    }, [recentlySuccessful]);
+
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        // console.log(data);
         post(route('admin.proker.store'));
     };
     return (

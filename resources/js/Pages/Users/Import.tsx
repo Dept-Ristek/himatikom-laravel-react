@@ -3,13 +3,28 @@ import { Input } from "@/Components/ui/input";
 import { Label } from "@/Components/ui/label";
 import { Transition } from "@headlessui/react";
 import { Button } from "@/Components/ui/button";
-import React, { FormEventHandler, useState } from "react";
+import React, { FormEventHandler, useEffect, useState } from "react";
 import MainLayout from "@/Layouts/MainLayout";
+import { useToast } from "@/hooks/use-toast";
 
 const PageImportUser = ({ title }: { title: string }) => {
+    const { toast } = useToast();
     const { data, setData, post, errors, processing, recentlySuccessful } = useForm<{ file: File | null }>({
         file: null,
     });
+    useEffect(() => {
+        if (recentlySuccessful) {
+            toast({
+                variant: "default",
+                title: "Import User",
+                description: "Berhasil menambahkan data user baru!",
+            });
+            setData({
+                ...data,
+                file: null
+            });
+        }
+    }, [recentlySuccessful])
     const onChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             setData('file', e.target.files[0])

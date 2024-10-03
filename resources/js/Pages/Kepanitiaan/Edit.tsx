@@ -1,5 +1,5 @@
 import { Head, Link, useForm } from "@inertiajs/react";
-import { FormEventHandler } from "react";
+import { FormEventHandler, useEffect } from "react";
 import { Label } from "@/Components/ui/label";
 import { Input } from "@/Components/ui/input";
 import { Button } from "@/Components/ui/button";
@@ -7,6 +7,7 @@ import { Transition } from "@headlessui/react";
 import { Textarea } from '@/Components/ui/textarea';
 import { Kepanitiaan } from "@/types";
 import MainLayout from "@/Layouts/MainLayout";
+import { useToast } from "@/hooks/use-toast";
 
 interface PageCreateKepengurusanProps {
     title: string;
@@ -14,10 +15,20 @@ interface PageCreateKepengurusanProps {
 }
 
 const PageEditKepanitiaan = ({ title, kepanitiaan }: PageCreateKepengurusanProps) => {
+    const { toast } = useToast();
     const { data, setData, put, errors, processing, recentlySuccessful } = useForm<Kepanitiaan>({
         name: kepanitiaan.name,
         description: kepanitiaan.description,
     });
+    useEffect(() => {
+        if (recentlySuccessful) {
+            toast({
+                variant: "default",
+                title: "Edit Kepanitiaan",
+                description: "Berhasil mengubah data kepanitiaan!",
+            })
+        }
+    }, [recentlySuccessful]);
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
         put(route('admin.kepanitiaan.update', kepanitiaan.id));

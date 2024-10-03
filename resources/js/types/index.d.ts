@@ -23,6 +23,37 @@ export interface Prodi {
     id?: string;
     name: string;
     slug?: string;
+    image: File | string | null;
+    content: string;
+    _method?: string;
+}
+
+export interface Inbox {
+    id?: string;
+    user_id?: string;
+    is_anon: boolean | undefined;
+    user?: User;
+    content: string;
+}
+
+export interface Product {
+    id?: string;
+    name: string;
+    image: File | string | null;
+    price: number;
+    description: string;
+    availability: string;
+    _method?: string;
+}
+
+export interface Blog {
+    id?: string;
+    user_id?: string;
+    user?: User;
+    title: string;
+    image: File | string | null;
+    content: string;
+    _method?: string;
 }
 
 export interface Proker {

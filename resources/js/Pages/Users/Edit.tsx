@@ -3,11 +3,13 @@ import { Input } from "@/Components/ui/input";
 import { Label } from "@/Components/ui/label";
 import { Transition } from "@headlessui/react";
 import { Button } from "@/Components/ui/button";
-import React, { FormEventHandler, useState } from "react";
+import React, { FormEventHandler, useEffect, useState } from "react";
 import MainLayout from "@/Layouts/MainLayout";
 import { User } from "@/types";
+import { useToast } from "@/hooks/use-toast";
 
 const PageCreateUsers = ({ title, user }: { title: string; user: User }) => {
+    const { toast } = useToast();
     const { data, setData, put, errors, processing, recentlySuccessful } = useForm<User>({
         nim: user?.nim,
         name: user?.name,
@@ -15,6 +17,20 @@ const PageCreateUsers = ({ title, user }: { title: string; user: User }) => {
         password: "",
         repeat_password: "",
     });
+    useEffect(() => {
+        if (recentlySuccessful) {
+            toast({
+                variant: "default",
+                title: "Edit User",
+                description: "Berhasil mengubah data user!",
+            });
+            setData({
+                ...data,
+                password: "",
+                repeat_password: "",
+            });
+        }
+    }, [recentlySuccessful])
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
         put(route('admin.user.update', user.id))

@@ -44,7 +44,7 @@ const MainNavbar = ({ user, className }: MainNavbarProps) => {
     return (
         <div className="bg-zinc-900 py-5 px-5 flex text-white justify-between items-center">
             <div className="flex flex-row gap-[4rem] items-center">
-                <Link href={route('dashboard')}>
+                <Link href={route('admin.dashboard')}>
                     <div className="flex flex-row gap-3 justify-center items-center">
                         <Image src="/icon/logo-himatikom.png" width={40} height={30} />
                         <Image src="/icon/octagram-with-border-radius.png" width={90} />
@@ -64,7 +64,7 @@ const MainNavbar = ({ user, className }: MainNavbarProps) => {
                         <DropdownMenuLabel>My Account</DropdownMenuLabel>
                         <DropdownMenuSeparator className="bg-slate-100" />
                         <DropdownMenuItem>
-                            <Link href={route('front.index')}>
+                            <Link href={route('v2.front.index')}>
                                 Landing Page
                             </Link>
                         </DropdownMenuItem>
@@ -72,21 +72,7 @@ const MainNavbar = ({ user, className }: MainNavbarProps) => {
                         <DropdownMenuItem asChild>
                             <AlertDialog>
                                 <AlertDialogTrigger className="text-sm p-2 w-full text-left hover:text-black hover:bg-secondary rounded-md">Logout</AlertDialogTrigger>
-                                {/* <AlertLogout key={"alert-logout-navbar"} /> */}
-                                <AlertDialogContent>
-                                    <AlertDialogHeader>
-                                        <AlertDialogTitle>Mengakhiri Sesi?</AlertDialogTitle>
-                                        <AlertDialogDescription>
-                                            Apakah anda yakin ingin mengakhiri sesi? login dibutuhkan kembali apabila ingin memulai sesi baru
-                                        </AlertDialogDescription>
-                                    </AlertDialogHeader>
-                                    <AlertDialogFooter>
-                                        <AlertDialogCancel>Batal</AlertDialogCancel>
-                                        <Link method="post" href={route('logout')} as="button" ref={'logout'}>
-                                            <AlertDialogAction className="w-full">Ya, Logout</AlertDialogAction>
-                                        </Link>
-                                    </AlertDialogFooter>
-                                </AlertDialogContent>
+                                <AlertLogout key={"alert-logout-navbar"} />
                             </AlertDialog>
                         </DropdownMenuItem>
                     </DropdownMenuContent>

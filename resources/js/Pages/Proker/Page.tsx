@@ -5,12 +5,7 @@ import MainLayout from "@/Layouts/MainLayout";
 import DataTable from "@/Components/DataTable";
 import ProkerTableColumn from "@/Pages/Proker/addon/Columns";
 
-interface PageProkerProps {
-    title: string;
-    prokers: Proker[];
-}
-
-const PageProker = ({ title, prokers }: PageProkerProps) => {
+const PageProker = ({ title, prokers }: { title: string; prokers: Proker[] }) => {
     return (
         <MainLayout>
             <Head title={title} />

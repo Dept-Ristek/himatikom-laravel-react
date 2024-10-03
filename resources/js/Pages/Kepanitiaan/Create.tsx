@@ -1,5 +1,5 @@
 import { Head, Link, useForm } from "@inertiajs/react";
-import { FormEventHandler } from "react";
+import { FormEventHandler, useEffect } from "react";
 import { Label } from "@/Components/ui/label";
 import { Input } from "@/Components/ui/input";
 import { Button } from "@/Components/ui/button";
@@ -7,12 +7,29 @@ import { Transition } from "@headlessui/react";
 import { Textarea } from '@/Components/ui/textarea';
 import { Kepanitiaan } from "@/types";
 import MainLayout from "@/Layouts/MainLayout";
+import { useToast } from "@/hooks/use-toast";
 
 const PageCreateKepanitiaan = ({ title }: { title: string }) => {
+    const { toast } = useToast();
     const { data, setData, post, errors, processing, recentlySuccessful } = useForm<Kepanitiaan>({
         name: "",
         description: "",
     });
+    useEffect(() => {
+        if (recentlySuccessful) {
+            toast({
+                variant: "default",
+                title: "Tambah Kepanitiaan",
+                description: "Berhasil menambahkan data kepanitiaan baru!",
+            });
+            setData({
+                ...data,
+                name: "",
+                description: "",
+            });
+        }
+    }, [recentlySuccessful]);
+
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
         post(route('admin.kepanitiaan.store'));

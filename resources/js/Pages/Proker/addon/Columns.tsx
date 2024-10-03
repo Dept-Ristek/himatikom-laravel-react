@@ -115,12 +115,6 @@ const ProkerTableColumn: ColumnDef<Proker>[] = [
             return (
                 <div className="flex flex-row gap-3 items-center">
                     <h1 className="text-md font-bold">{proker.need_to_register ? "Ya" : "Tidak"}</h1>
-                    {
-                        proker.need_to_register ?
-                            <Link href={route('admin.proker.kepanitiaan.create', proker.id)} className="px-3 py-1 rounded-md bg-primary text-sm text-white">Atur Kepanitiaan</Link>
-                            :
-                            <></>
-                    }
                 </div>
             );
         }
