@@ -14,6 +14,7 @@ class Inbox extends Model
 
     protected $fillable = [
         'user_id',
+        'is_anon',
         'content',
     ];
 

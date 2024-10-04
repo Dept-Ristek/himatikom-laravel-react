@@ -22,11 +22,10 @@ const Himpunan = ({ title, kepengurusans }: { title: string; kepengurusans: Kepe
         return truncatedWord.join(" ") + "...";
     }
 
-
     return (
         <FrontLayout>
             <Head title={title} />
-            <div className="h-auto flex flex-col justify-center items-center px-[6rem] py-[3rem]">
+            <div className="h-auto flex flex-col justify-center items-center px-5 md:px-[6rem] lg:px-[6px] py-[3rem]">
                 <section className="mb-[3rem]">
                     <h1 className="font-extrabold text-3xl text-center mb-5 cursor-default">Kabinet</h1>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5 rounded-lg justify-items-center">

@@ -20,6 +20,8 @@ import {
     BookMarkedIcon,
     BookUserIcon,
     LucideDraftingCompass,
+    MailWarningIcon,
+    Box,
 } from "lucide-react";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/Components/ui/alert-dialog";
 import AlertLogout from "@/Layouts/components/AlertLogout";
@@ -85,6 +87,18 @@ const CommandContent = ({ className }: CommandContentProps) => {
                             <CommandItem className={url == 'admin.blog.index' ? "bg-white text-black" : "text-white"}>
                                 <LucideDraftingCompass size={20} className="mr-2" />
                                 Berita
+                            </CommandItem>
+                        </Link>
+                        <Link href={route('admin.inbox.index')}>
+                            <CommandItem className={url == 'admin.inbox.index' ? "bg-white text-black" : "text-white"}>
+                                <MailWarningIcon size={20} className="mr-2" />
+                                Saran & Masukan
+                            </CommandItem>
+                        </Link>
+                        <Link href={route('admin.product.index')}>
+                            <CommandItem className={url == 'admin.product.index' ? "bg-white text-black" : "text-white"}>
+                                <Box size={20} className="mr-2" />
+                                Product
                             </CommandItem>
                         </Link>
                     </CommandGroup> : <></>}

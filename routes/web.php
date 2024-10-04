@@ -8,6 +8,7 @@ use App\Http\Controllers\KepanitiaanController;
 use App\Http\Controllers\KepengurusanController;
 use App\Http\Controllers\PengurusController;
 use App\Http\Controllers\ProdiController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProkerController;
 use App\Http\Controllers\UserController;
@@ -122,8 +123,21 @@ Route::prefix('admin')->name('admin.')->group(function() {
         Route::put('/blog/update/{blog}', 'update')->name('blog.update');
     });
 
-    Route::controller(InboxController::class)->group(function() {
+    Route::controller(InboxController::class)->middleware(['auth'])->group(function() {
+            Route::get('/inbox', 'index')->name('inbox.index');
         Route::post('/inbox/store', 'store')->name('inbox.store');
+    });
+
+    Route::controller(ProductController::class)->middleware(['auth'])->group(function() {
+        Route::get('/product', 'index')->name('product.index');
+        Route::get('/product/create', 'create')->name('product.create');
+        Route::get('/product/edit/{product}', 'edit')->name('product.edit');
+
+        Route::post('/product/store', 'store')->name('product.store');
+
+        Route::put('/product/updat/{product}', 'update')->name('product.update');
+
+        Route::delete('/product/delete/{product}', 'destroy')->name('product.delete');
     });
 });
 
