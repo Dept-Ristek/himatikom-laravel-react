@@ -7,6 +7,7 @@ use App\Http\Resources\ProductResource;
 use App\Models\Blog;
 use App\Models\Kepengurusan;
 use App\Models\Prodi;
+use App\Models\Product;
 use App\Models\Proker;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -45,6 +46,14 @@ class FrontController extends Controller
         return Inertia::render('Front/partials/Blog', [
             'title' => 'Detail Berita',
             'blog' => $blog,
+        ]);
+    }
+
+    public function product_detail(Product $product): Response
+    {
+        return Inertia::render('Front/partials/Product', [
+            'title' => 'Detail Produk',
+            'product' => $product
         ]);
     }
 

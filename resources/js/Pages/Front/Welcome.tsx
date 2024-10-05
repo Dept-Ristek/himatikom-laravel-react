@@ -33,8 +33,9 @@ const Welcome = ({ title }: { title: string }) => {
         }).catch((error) => console.error(error));
     }
 
+    const images: string[] = ['/carousel/mubes.jpeg', '/carousel/mabim.jpeg', '/carousel/difest1.jpeg', '/carousel/difest2.jpeg'];
+
     useEffect((): void => {
-        const images = ['/carousel/mubes.jpeg', '/carousel/mabim.jpeg', '/carousel/difest1.jpeg', '/carousel/difest2.jpeg'];
         setImage(images);
         getAllBlog();
         getAllProduct();
@@ -134,7 +135,7 @@ const Welcome = ({ title }: { title: string }) => {
             {/* Section Product */}
             <section className="mb-[3rem] flex flex-col justify-center items-center">
                 <h1 className="font-extrabold text-3xl text-center mb-5 cursor-default">HIMATIKOM Store</h1>
-                <div className={cn(blogs.length > 0 ? "p-3 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 text-zinc-900 gap-3 w-full md:w-2/3 lg:w-2/3" : "flex flex-col justify-center items-center text-zinc-900 w-full")}>
+                <div className={cn(products.length > 0 ? "p-3 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 text-zinc-900 gap-3 w-full md:w-2/3 lg:w-2/3" : "flex flex-col justify-center items-center text-zinc-900 w-full")}>
                     {products.length > 0 ?
                         products.map((data, index) => {
                             return (
@@ -142,7 +143,7 @@ const Welcome = ({ title }: { title: string }) => {
                                     <Image src={data.image as string} className="rounded-md mb-3" />
                                     <h1 className="font-bold mb-3">{data.name}</h1>
                                     <h3 className="text-sm font-bold mb-3">Rp. {Intl.NumberFormat('id-ID').format(+data.price)}</h3>
-                                    <Link href="/">
+                                    <Link href={route('v2.front.product.detail', data.id)}>
                                         <Button>Detail</Button>
                                     </Link>
                                 </div>
@@ -154,7 +155,7 @@ const Welcome = ({ title }: { title: string }) => {
                 </div>
                 {products.length > 4 ?
                     <div className="flex justify-center items-center my-[3rem]">
-                        <Link href="/">
+                        <Link href={route('v2.front.product')}>
                             <Button className="bg-primary">Produk Lainya</Button>
                         </Link>
                     </div>

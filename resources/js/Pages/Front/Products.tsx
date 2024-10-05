@@ -32,7 +32,7 @@ const PageProducts = ({ title }: { title: string }) => {
         <FrontLayout>
             <Head title={title} />
             {/* Section Product */}
-            <section className="mb-[3rem] flex flex-col justify-center items-center">
+            <section className={cn(products.length > 0 ? "mb-[3rem] flex flex-col justify-center items-center" : "mb-[3rem] flex flex-col justify-center items-center h-screen")}>
                 <h1 className="font-extrabold text-3xl text-center mb-5 cursor-default mt-[3rem]">HIMATIKOM Store</h1>
                 <div className={cn(products.length > 0 ? "p-3 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 text-zinc-900 gap-3 w-full md:w-2/3 lg:w-2/3" : "flex flex-col justify-center items-center text-zinc-900 w-full")}>
                     {products.length > 0 ?
@@ -52,9 +52,13 @@ const PageProducts = ({ title }: { title: string }) => {
                         <h1 className="text-2xl text-center font-bold">Belum ada produk!</h1>
                     }
                 </div>
-                <div className="flex justify-center items-center my-[3rem]">
-                    <Button className="bg-primary" onClick={handleClick}>Produk Lainya</Button>
-                </div>
+                {products.length > 0 ?
+                    <div className="flex justify-center items-center my-[3rem]">
+                        <Button className="bg-primary" onClick={handleClick}>Produk Lainya</Button>
+                    </div>
+                    :
+                    <></>
+                }
             </section>
         </FrontLayout>
     )
