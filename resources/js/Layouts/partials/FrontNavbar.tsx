@@ -96,7 +96,18 @@ const FrontNavbar = () => {
                             </MenubarContent>
                         </MenubarMenu>
                         <MenubarMenu>
-                            <MenubarLabel className="relative">Berita</MenubarLabel>
+                            <MenubarLabel className="relative">
+                                <Link href={route('v2.front.blog')}>
+                                    Berita
+                                </Link>
+                            </MenubarLabel>
+                        </MenubarMenu>
+                        <MenubarMenu>
+                            <MenubarLabel className="relative">
+                                <Link href={route('v2.front.product')}>
+                                    Produk
+                                </Link>
+                            </MenubarLabel>
                         </MenubarMenu>
                         {user ?
                             <MenubarMenu>
@@ -105,7 +116,7 @@ const FrontNavbar = () => {
                                     <MenubarLabel inset>{user.name}</MenubarLabel>
                                     <MenubarSeparator />
                                     <MenubarItem inset>
-                                        <Link href={route('admin.dashboard')} as="button">
+                                        <Link href={route('admin.dashboard.index')} as="button">
                                             Dashboard
                                         </Link>
                                     </MenubarItem>
@@ -172,18 +183,23 @@ const FrontNavbar = () => {
                                     </AccordionContent>
                                 </AccordionItem>
                                 <AccordionItem value="berita" className="mt-4 border-b-0">
-                                    <Link href={route('v2.front.index')}>
+                                    <Link href={route('v2.front.blog')}>
                                         Berita
+                                    </Link>
+                                </AccordionItem>
+                                <AccordionItem value="produk" className="mt-4 border-b-0">
+                                    <Link href={route('v2.front.product')}>
+                                        Produk
                                     </Link>
                                 </AccordionItem>
                                 {user ?
                                     <AccordionItem value="akun">
                                         <AccordionTrigger>Akun</AccordionTrigger>
                                         <AccordionContent className="flex flex-col gap-3">
-                                            <Link href={route('admin.dashboard')}>
+                                            <Link href={route('admin.dashboard.index')}>
                                                 Dashboard
                                             </Link>
-                                            <Link href={route('logout')} method="post" as="buttono">
+                                            <Link href={route('logout')} method="post" as="button">
                                                 Logout
                                             </Link>
                                         </AccordionContent>

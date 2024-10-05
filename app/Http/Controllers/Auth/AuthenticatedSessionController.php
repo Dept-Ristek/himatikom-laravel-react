@@ -35,7 +35,7 @@ class AuthenticatedSessionController extends Controller
 
         $user = Auth::user();
         if ($user->hasAnyRole(['admin', 'pengurus', 'panitia'])) {
-            return redirect()->intended(route('admin.dashboard', absolute: false));
+            return redirect()->intended(route('admin.dashboard.index', absolute: false));
         }
         return redirect()->intended(route('v2.front.index', absolute:false));
     }

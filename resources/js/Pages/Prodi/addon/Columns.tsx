@@ -16,7 +16,7 @@ import {
 } from "@/Components/ui/alert-dialog";
 import { Prodi } from "@/types";
 import { Link } from "@inertiajs/react";
-import DialogDeleteProdi from "@/Pages/Prodi/addon/DialogDelete";
+import DialogDelete from "@/Components/DialogDelete";
 const ProdiTableColumns: ColumnDef<Prodi>[] = [
     {
         accessorKey: "name",
@@ -56,7 +56,7 @@ const ProdiTableColumns: ColumnDef<Prodi>[] = [
                         <DropdownMenuItem asChild>
                             <AlertDialog>
                                 <AlertDialogTrigger className="text-sm text-left rounded-md w-full p-2 hover:bg-slate-100">Hapus</AlertDialogTrigger>
-                                <DialogDeleteProdi prodi={prodi} />
+                                <DialogDelete id={prodi.id as string} url="admin.prodi.destroy" />
                             </AlertDialog>
                         </DropdownMenuItem>
                     </DropdownMenuContent>

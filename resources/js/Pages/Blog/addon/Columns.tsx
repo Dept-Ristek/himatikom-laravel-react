@@ -17,7 +17,7 @@ import {
 import { Link } from "@inertiajs/react";
 import { Blog } from '@/types';
 import Image from "@/Components/Image";
-import DialogDeleteKepengurusan from "@/Pages/Kepengurusan/addon/DialogDelete";
+import DialogDelete from "@/Components/DialogDelete";
 const BlogTableColumn: ColumnDef<Blog>[] = [
     {
         accessorKey: "title",
@@ -67,7 +67,7 @@ const BlogTableColumn: ColumnDef<Blog>[] = [
                         <DropdownMenuItem asChild>
                             <AlertDialog>
                                 <AlertDialogTrigger className="text-sm text-left rounded-md w-full p-2 hover:bg-slate-100">Hapus</AlertDialogTrigger>
-                                {/* <DialogDeleteKepengurusan kepengurusan={blog} /> */}
+                                <DialogDelete id={blog.id as string} url="admin.blog.destroy" />
                             </AlertDialog>
                         </DropdownMenuItem>
                     </DropdownMenuContent>

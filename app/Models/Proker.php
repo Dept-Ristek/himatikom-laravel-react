@@ -6,11 +6,8 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
-use function PHPSTORM_META\map;
 
 class Proker extends Model
 {
@@ -36,9 +33,9 @@ class Proker extends Model
         'deleted_at',
     ];
 
-    public function kepanitiaan_proker(): HasMany
+    public function registration(): HasMany
     {
-        return $this->hasMany(KepanitiaanProker::class);
+        return $this->hasMany(Registration::class);
     }
 
     public function kepengurusan(): BelongsTo

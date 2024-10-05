@@ -14,12 +14,13 @@ class Document extends Model
 
     protected $fillable = [
         'user_id',
+        'name',
         'tag',
         'type',
         'filepath',
         'description',
         'doc_from',
-        'doc_to'
+        'doc_to',
     ];
 
     protected $hidden = [

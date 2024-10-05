@@ -17,7 +17,7 @@ import {
 import { Link } from "@inertiajs/react";
 import { Kepengurusan } from '@/types';
 import Image from "@/Components/Image";
-import DialogDeleteKepengurusan from "@/Pages/Kepengurusan/addon/DialogDelete";
+import DialogDelete from "@/Components/DialogDelete";
 const KepengurusanTableColumn: ColumnDef<Kepengurusan>[] = [
     {
         accessorKey: "name",
@@ -67,7 +67,7 @@ const KepengurusanTableColumn: ColumnDef<Kepengurusan>[] = [
                         <DropdownMenuItem asChild>
                             <AlertDialog>
                                 <AlertDialogTrigger className="text-sm text-left rounded-md w-full p-2 hover:bg-slate-100">Hapus</AlertDialogTrigger>
-                                <DialogDeleteKepengurusan kepengurusan={kepengurusan} />
+                                <DialogDelete id={kepengurusan.id as string} url="admin.kepengurusan.destroy" />
                             </AlertDialog>
                         </DropdownMenuItem>
                     </DropdownMenuContent>

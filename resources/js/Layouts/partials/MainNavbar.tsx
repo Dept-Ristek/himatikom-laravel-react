@@ -44,7 +44,7 @@ const MainNavbar = ({ user, className }: MainNavbarProps) => {
     return (
         <div className="bg-zinc-900 py-5 px-5 flex text-white justify-between items-center">
             <div className="flex flex-row gap-[4rem] items-center">
-                <Link href={route('admin.dashboard')}>
+                <Link href={route('admin.dashboard.index')}>
                     <div className="flex flex-row gap-3 justify-center items-center">
                         <Image src="/icon/logo-himatikom.png" width={40} height={30} />
                         <Image src="/icon/octagram-with-border-radius.png" width={90} />

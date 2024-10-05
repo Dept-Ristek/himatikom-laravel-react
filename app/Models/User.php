@@ -61,13 +61,18 @@ class User extends Authenticatable
         return $this->hasOne(Pengurus::class);
     }
 
-    public function prokers(): BelongsToMany
+    public function registration(): HasMany
     {
-        return $this->belongsToMany(Proker::class, 'kepanitiaan_prokers');
+        return $this->hasMany(Registration::class);
     }
 
     public function inbox(): HasMany
     {
         return $this->hasMany(Inbox::class);
+    }
+
+    public function document(): HasMany
+    {
+        return $this->hasMany(Document::class);
     }
 }

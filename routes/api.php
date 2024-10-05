@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\ApiBlogController;
+use App\Http\Controllers\Api\ApiProductController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\ProductController;
@@ -11,5 +13,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('/prodi', [ProdiController::class, 'APIGetAllData'])->name('api.prodi.get');
-Route::get('/blog', [BlogController::class, 'APIGetAllData'])->name('api.blog.get');
-Route::get('/product', [ProductController::class, 'APIGetAllData'])->name('api.product.get');
+
+Route::get('/blog/{id?}/{count?}', [ApiBlogController::class, 'getAllData'])->name('api.blog.get');
+
+Route::get('/product/{id?}/{count?}', [ApiProductController::class, 'getAllData'])->name('api.product.get');

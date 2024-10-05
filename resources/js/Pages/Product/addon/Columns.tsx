@@ -17,7 +17,7 @@ import {
 import { Product } from "@/types";
 import { Link } from "@inertiajs/react";
 import Image from "@/Components/Image";
-import DialogDeleteProduct from "@/Pages/Product/addon/DialogDelete";
+import DialogDelete from "@/Components/DialogDelete";
 const ProductTableColumns: ColumnDef<Product>[] = [
     {
         accessorKey: "name",
@@ -47,7 +47,7 @@ const ProductTableColumns: ColumnDef<Product>[] = [
         id: "actions",
         header: "Aksi",
         cell: ({ row }) => {
-            const prodi = row.original
+            const product = row.original
             return (
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -59,7 +59,7 @@ const ProductTableColumns: ColumnDef<Product>[] = [
                     <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <Link href={route('admin.product.edit', prodi.id)}>
+                        <Link href={route('admin.product.edit', product.id)}>
                             <DropdownMenuItem>
                                 Edit
                             </DropdownMenuItem>
@@ -67,7 +67,7 @@ const ProductTableColumns: ColumnDef<Product>[] = [
                         <DropdownMenuItem asChild>
                             <AlertDialog>
                                 <AlertDialogTrigger className="text-sm text-left rounded-md w-full p-2 hover:bg-slate-100">Hapus</AlertDialogTrigger>
-                                <DialogDeleteProduct product={prodi} />
+                                <DialogDelete id={product.id as string} url="admin.product.destroy" />
                             </AlertDialog>
                         </DropdownMenuItem>
                     </DropdownMenuContent>

@@ -17,7 +17,7 @@ class ProductController extends Controller
 {
     public function APIGetAllData()
     {
-        return Collection::make(Product::all());
+        return Collection::make(Product::paginate(4));
     }
 
     /**

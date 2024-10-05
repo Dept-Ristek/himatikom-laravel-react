@@ -95,6 +95,19 @@ export interface KepanitiaanProker {
     kepanitiaan?: Kepanitiaan;
 }
 
+export interface Document {
+    id?: string;
+    user_id?: string;
+    user?: User;
+    name: string;
+    tag: string;
+    type?: string | null;
+    filepath: File | string | null;
+    description: string;
+    doc_from?: string | null;
+    doc_to?: string | null;
+}
+
 export type PageProps<
     T extends Record<string, unknown> = Record<string, unknown>
 > = T & {

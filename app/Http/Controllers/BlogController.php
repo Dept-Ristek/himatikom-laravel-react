@@ -18,9 +18,13 @@ class BlogController extends Controller
 {
     public function APIGetAllData()
     {
-        return Blog::paginate(3);
+        return Blog::paginate(6);
     }
 
+    public function APIGetAllDataWithout($id)
+    {
+        return Blog::where('id', '!=', $id)->paginate(3);
+    }
     /**
      * Display a listing of the resource.
      */

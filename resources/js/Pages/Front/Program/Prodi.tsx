@@ -3,7 +3,7 @@ import FrontLayout from "@/Layouts/FrontLayout";
 import { Prodi } from "@/types";
 import Image from "@/Components/Image";
 import ReactQuill, { Quill } from 'react-quill';
-import './addon/custom.css';
+import '../custom.css';
 
 const FrontProdi = ({ title, prodi }: { title: string; prodi: Prodi }) => {
 

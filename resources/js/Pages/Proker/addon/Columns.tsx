@@ -152,7 +152,7 @@ const ProkerTableColumn: ColumnDef<Proker>[] = [
                                     </AlertDialogHeader>
                                     <AlertDialogFooter>
                                         <AlertDialogCancel>Batal</AlertDialogCancel>
-                                        <Link href={route('admin.proker.delete', proker.id)} method="delete" as="button">
+                                        <Link href={route('admin.proker.destroy', proker.id)} method="delete" as="button">
                                             <AlertDialogAction className="bg-red-600">Hapus</AlertDialogAction>
                                         </Link>
                                     </AlertDialogFooter>

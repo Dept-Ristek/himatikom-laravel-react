@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->constrained();
+            $table->string('name');
             $table->enum('tag', ['sertifikat', 'proposal', 'surat'])->default('surat');
             $table->enum('type', ['surat-masuk', 'surat-keluar'])->nullable()->default('surat-masuk');
             $table->string('filepath')->nullable();

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\BlogResource;
+use App\Http\Resources\ProductResource;
+use App\Models\Blog;
 use App\Models\Kepengurusan;
 use App\Models\Prodi;
 use App\Models\Proker;
@@ -37,6 +40,14 @@ class FrontController extends Controller
         ]);
     }
 
+    public function blog_detail(Blog $blog): Response
+    {
+        return Inertia::render('Front/partials/Blog', [
+            'title' => 'Detail Berita',
+            'blog' => $blog,
+        ]);
+    }
+
     public function himpunan(): Response
     {
         return Inertia::render('Front/Tentang/Himpunan', [
@@ -49,6 +60,20 @@ class FrontController extends Controller
     {
         return Inertia::render('Front/Tentang/Jurusan', [
             'title' => 'JTIK',
+        ]);
+    }
+
+    public function blogs(): Response
+    {
+        return Inertia::render('Front/Blogs', [
+            'title' => 'Kumpulan Berita',
+        ]);
+    }
+
+    public function products(): Response
+    {
+        return Inertia::render('Front/Products', [
+            'title' => 'Produk HIMATIKOM',
         ]);
     }
 }

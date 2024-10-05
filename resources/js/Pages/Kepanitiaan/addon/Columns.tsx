@@ -15,7 +15,7 @@ import {
 } from "@/Components/ui/alert-dialog";
 import { Link } from "@inertiajs/react";
 import { Kepanitiaan } from "@/types";
-import DialogDeleteKepanitiaan from "@/Pages/Kepanitiaan/addon/DialogDelete";
+import DialogDelete from "@/Components/DialogDelete";
 
 const KepanitiaanTableColumn: ColumnDef<Kepanitiaan>[] = [
     {
@@ -56,7 +56,7 @@ const KepanitiaanTableColumn: ColumnDef<Kepanitiaan>[] = [
                         <DropdownMenuItem asChild>
                             <AlertDialog>
                                 <AlertDialogTrigger className="text-sm text-left rounded-md w-full p-2 hover:bg-slate-100">Hapus</AlertDialogTrigger>
-                                <DialogDeleteKepanitiaan kepanitiaan={kepanitiaan} />
+                                <DialogDelete id={kepanitiaan.id as string} url="admin.kepanitiaan.destroy" />
                             </AlertDialog>
                         </DropdownMenuItem>
                     </DropdownMenuContent>

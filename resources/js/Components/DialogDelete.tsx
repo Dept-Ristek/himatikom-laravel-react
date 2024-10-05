@@ -1,4 +1,3 @@
-import { Product } from "@/types";
 import {
     AlertDialogAction,
     AlertDialogCancel,
@@ -10,7 +9,7 @@ import {
 } from "@/Components/ui/alert-dialog";
 import { Link } from '@inertiajs/react';
 
-const DialogDeleteProduct = ({ product }: { product: Product }) => {
+const DialogDelete = ({ url, id }: { url: string; id: string }) => {
     return (
         <AlertDialogContent>
             <AlertDialogHeader>
@@ -21,11 +20,11 @@ const DialogDeleteProduct = ({ product }: { product: Product }) => {
             </AlertDialogHeader>
             <AlertDialogFooter>
                 <AlertDialogCancel>Batal</AlertDialogCancel>
-                <Link href={route('admin.product.delete', product.id)} method="delete" as="button">
+                <Link href={route(url, id)} method="delete" as="button">
                     <AlertDialogAction className="bg-red-600">Hapus</AlertDialogAction>
                 </Link>
             </AlertDialogFooter>
         </AlertDialogContent>
     );
 }
-export default DialogDeleteProduct;
+export default DialogDelete;

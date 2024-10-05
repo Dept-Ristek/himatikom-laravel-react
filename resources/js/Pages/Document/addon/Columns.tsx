@@ -1,7 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Pengurus } from "@/types";
+import { MoreHorizontal } from "lucide-react";
 import { Button } from "@/Components/ui/button";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import { ArrowUpDown } from "lucide-react";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -15,25 +15,13 @@ import {
     AlertDialogTrigger,
 } from "@/Components/ui/alert-dialog";
 import { Link } from "@inertiajs/react";
+import { Document } from '@/types';
 import DialogDelete from "@/Components/DialogDelete";
+import { tags, docTypes } from "@/Pages/Document/types/data";
 
-const PengurusTableColumn: ColumnDef<Pengurus>[] = [
+const DocumentTableColumn: ColumnDef<Document>[] = [
     {
-        accessorKey: 'user.nim',
-        header: ({ column }) => {
-            return (
-                <Button
-                    variant="ghost"
-                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-                >
-                    NIM
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-            )
-        },
-    },
-    {
-        accessorKey: 'user.name',
+        accessorKey: "name",
         header: ({ column }) => {
             return (
                 <Button
@@ -47,24 +35,46 @@ const PengurusTableColumn: ColumnDef<Pengurus>[] = [
         },
     },
     {
-        accessorKey: 'kepengurusan.name',
+        accessorKey: "tag",
         header: ({ column }) => {
             return (
                 <Button
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Kepengurusan
+                    Tag
                     <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
             )
         },
+        cell: ({ row }) => {
+            const document = row.original;
+            const selected_tag = tags.find((val) => val.id === document.tag);
+            const selected_type = docTypes.find((val) => val.id === document.type)
+            return (
+                <h3 className="text-md">{selected_tag?.id == "surat" ? `${selected_tag?.label} (${selected_type?.label})` : `${selected_tag?.label}`}</h3>
+            );
+        }
+    },
+    {
+        accessorKey: "filePath",
+        header: "Document",
+        cell: ({ row }) => {
+            const document = row.original;
+            return (
+                <a href={document.filepath as string} target="_blank" download={document.name}>
+                    <Button className="bg-primary">
+                        Download
+                    </Button>
+                </a>
+            );
+        }
     },
     {
         id: "actions",
         header: "Aksi",
         cell: ({ row }) => {
-            const pengurus = row.original
+            const document = row.original
             return (
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -76,7 +86,7 @@ const PengurusTableColumn: ColumnDef<Pengurus>[] = [
                     <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <Link href={route('admin.pengurus.edit', pengurus.id)}>
+                        <Link href={route('admin.document.edit', document.id)}>
                             <DropdownMenuItem>
                                 Edit
                             </DropdownMenuItem>
@@ -84,13 +94,13 @@ const PengurusTableColumn: ColumnDef<Pengurus>[] = [
                         <DropdownMenuItem asChild>
                             <AlertDialog>
                                 <AlertDialogTrigger className="text-sm text-left rounded-md w-full p-2 hover:bg-slate-100">Hapus</AlertDialogTrigger>
-                                <DialogDelete id={pengurus.id as string} url="admin.pengurus.destroy" />
+                                <DialogDelete id={document.id as string} url="admin.document.destroy" />
                             </AlertDialog>
                         </DropdownMenuItem>
                     </DropdownMenuContent>
-                </DropdownMenu >
+                </DropdownMenu>
             )
         },
     },
-]
-export default PengurusTableColumn;
+];
+export default DocumentTableColumn;

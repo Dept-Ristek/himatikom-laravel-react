@@ -25,8 +25,8 @@ class Kepanitiaan extends Model
         'deleted_at',
     ];
 
-    public function kepanitiaan_proker(): HasMany
+    public function registration(): HasMany
     {
-        return $this->hasMany(KepanitiaanProker::class);
+        return $this->hasMany(Registration::class);
     }
 }
