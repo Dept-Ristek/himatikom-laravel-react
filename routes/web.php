@@ -53,11 +53,11 @@ Route::prefix('admin')->name('admin.')->group(function() {
         Route::resource('prodi',ProdiController::class);
         // Prodi additional
 
-        // User
-        Route::resource('user', UserController::class);
         // User additional
         Route::get('/user/import', [UserController::class, 'import'])->name('user.import');
         Route::post('/user/import/store', [UserController::class, 'import_store'])->name('user.import.store');
+        // User
+        Route::resource('user', UserController::class);
 
         // Kepengurusan
         Route::resource('kepengurusan', KepengurusanController::class);
