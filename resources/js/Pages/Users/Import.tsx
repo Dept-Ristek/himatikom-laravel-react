@@ -7,7 +7,7 @@ import React, { FormEventHandler, useEffect, useState } from "react";
 import MainLayout from "@/Layouts/MainLayout";
 import { useToast } from "@/hooks/use-toast";
 
-const PageImportUser = ({ title }: { title: string }) => {
+const PageImportUsers = ({ title }: { title: string }) => {
     const { toast } = useToast();
     const { data, setData, post, errors, processing, recentlySuccessful } = useForm<{ file: File | null }>({
         file: null,
@@ -66,4 +66,4 @@ const PageImportUser = ({ title }: { title: string }) => {
         </MainLayout>
     );
 }
-export default PageImportUser;
+export default PageImportUsers;
