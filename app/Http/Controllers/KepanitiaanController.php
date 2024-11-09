@@ -20,7 +20,7 @@ class KepanitiaanController extends Controller
     public function index(): Response
     {
         return Inertia::render('Kepanitiaan/Page', [
-            'title' => ' Struktur Kepanitiaan',
+            'title' => 'Struktur Kepanitiaan',
             'kepanitiaans' => Kepanitiaan::all(),
         ]);
     }

@@ -101,6 +101,7 @@ const Welcome = ({ title }: { title: string }) => {
                     </div>
                 </div>
             </section>
+
             {/* Section Berita */}
             <section className="mb-[3rem] flex flex-col justify-center items-center">
                 <h1 className="font-extrabold text-3xl text-center mb-5 cursor-default">Berita Terbaru HIMATIKOM</h1>

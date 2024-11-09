@@ -93,6 +93,11 @@ const FrontNavbar = () => {
                                         Program Kerja
                                     </Link>
                                 </MenubarItem>
+                                <MenubarItem>
+                                    <Link href={route('v2.mubes.index')}>
+                                        Mubes 2024
+                                    </Link>
+                                </MenubarItem>
                             </MenubarContent>
                         </MenubarMenu>
                         <MenubarMenu>
@@ -179,6 +184,9 @@ const FrontNavbar = () => {
                                         }
                                         <Link href={route('v2.front.proker')}>
                                             Program Kerja
+                                        </Link>
+                                        <Link href={route('v2.mubes.index')}>
+                                            Mubes 2024
                                         </Link>
                                     </AccordionContent>
                                 </AccordionItem>

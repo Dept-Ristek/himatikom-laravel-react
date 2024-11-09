@@ -12,6 +12,7 @@ use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProkerController;
+use App\Http\Controllers\TempPemilihanController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +42,11 @@ Route::prefix('v2')->name('v2.')->group(function() {
         Route::get('/tentang/himpunan', 'himpunan')->name('front.himpunan');
         Route::get('/tentang/jurusan', 'jurusan')->name('front.jurusan');
     });
+
+    Route::controller(TempPemilihanController::class)->group(function () {
+        Route::get('/mubes', 'index')->name('mubes.index');
+    });
+
 });
 
 Route::prefix('admin')->name('admin.')->group(function() {
