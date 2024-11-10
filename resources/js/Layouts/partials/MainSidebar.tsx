@@ -1,4 +1,4 @@
-import CommandContent from "../components/CommandContent";
+import CommandContent from "@/Layouts/components/CommandContent";
 
 const MainSidebar = () => {
     return (

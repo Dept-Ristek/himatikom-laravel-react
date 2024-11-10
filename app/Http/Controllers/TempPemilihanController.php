@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TempPemilihan;
+use App\Models\TempToken;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -19,51 +20,50 @@ class TempPemilihanController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function pemilihan(): Response
     {
-        //
+        return Inertia::render('Front/Program/Mubes/Pemilihan', [
+            'title' => 'Pemilihan Ketua & Wakil Ketua'
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    public function token_check($token)
+    {
+        // return $token;
+        $token = TempToken::where('token', $token)->first();
+
+        if (!$token) {
+            return response()->json([
+                'status' => 500,
+                'title' => 'Gagal Cek Token',
+                'message' => 'Tidak dapat menemukan token tersebut, harap hubungi panitia segera!'
+            ]);
+        }
+
+        if ($token->is_used) {
+            return response()->json([
+                'status' => 500,
+                'title' => 'Gagal Cek Token',
+                'message' => 'Token yang sudah digunakan tidak dapat dipakai! harap hubungi panitia segera!'
+            ]);
+        }
+
+        return $token;
+
+    }
+
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(TempPemilihan $tempPemilihan)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(TempPemilihan $tempPemilihan)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, TempPemilihan $tempPemilihan)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(TempPemilihan $tempPemilihan)
-    {
-        //
+        $paslon = TempPemilihan::find($request->id);
+        $token = TempToken::where('token', $request->token)->first();
+        $paslon->total += 1;
+        $paslon->save();
+        $token->is_used = true;
+        $token->temp_pemilihan_id = $paslon->id;
+        $token->save();
+        return response()->json([
+            'title' => 'Berhasil memilih',
+            'message' => 'Terimakasih telah menggunakan hak suara, mari bangun himpunan lebih baik lagi!'
+        ]);
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\TempPemilihanController as AdminTempPemilihanController;
+use App\Http\Controllers\Admin\TempTokenController as AdminTempTokenController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DocumentController;
@@ -45,6 +47,11 @@ Route::prefix('v2')->name('v2.')->group(function() {
 
     Route::controller(TempPemilihanController::class)->group(function () {
         Route::get('/mubes', 'index')->name('mubes.index');
+        Route::get('/mubes/pemilihan', 'pemilihan')->name('mubes.pemilihan');
+
+        Route::get('/mubes/pemilihan/{token}/check', 'token_check')->name('mubes.token.check');
+
+        Route::post('/mubes/pemilihan', 'store')->name('mubes.pemilihan.store');
     });
 
 });
@@ -96,6 +103,14 @@ Route::prefix('admin')->name('admin.')->group(function() {
         // Document
         Route::resource('document', DocumentController::class);
         // Document additional
+
+        // Pemilihan
+        Route::get('temp/pemilihan/paslon', [AdminTempPemilihanController::class, 'get_count'])->name('pemilihan.count');
+        Route::resource('temp/pemilihan', AdminTempPemilihanController::class);
+
+        // Token Pemilihan
+        Route::get('temp/token/export', [AdminTempTokenController::class, 'export'])->name('token.export');
+        Route::resource('temp/token', AdminTempTokenController::class);
     });
 });
 

@@ -108,6 +108,21 @@ export interface Document {
     doc_to?: string | null;
 }
 
+export interface Pemilihan {
+    id?: number;
+    name: string;
+    image: string;
+    total: number;
+}
+
+export interface Token {
+    id?: number;
+    token: string;
+    is_used: boolean;
+    temp_pemilihan_id?: number;
+    temp_pemilian?: Pemilihan[]
+}
+
 export type PageProps<
     T extends Record<string, unknown> = Record<string, unknown>
 > = T & {

@@ -64,6 +64,11 @@ const MainNavbar = ({ user, className }: MainNavbarProps) => {
                         <DropdownMenuLabel>My Account</DropdownMenuLabel>
                         <DropdownMenuSeparator className="bg-slate-100" />
                         <DropdownMenuItem>
+                            <Link href={route('admin.pemilihan.index')}>
+                                Dashboard Pemilihan
+                            </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
                             <Link href={route('v2.front.index')}>
                                 Landing Page
                             </Link>
