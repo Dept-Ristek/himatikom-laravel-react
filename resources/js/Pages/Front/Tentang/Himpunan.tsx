@@ -30,37 +30,52 @@ const Himpunan = ({ title, kepengurusans }: { title: string; kepengurusans: Kepe
                     <h1 className="font-extrabold text-3xl text-center mb-5 cursor-default">Kabinet</h1>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5 rounded-lg justify-items-center">
                         <div className="flex flex-col p-2 rounded-lg justify-center items-center bg-white md:w-3/4 lg:w-3/4 w-full md:justify-self-end lg:justify-self-end justify-self-center shadow-md">
-                            <Image src="/icon/octagram.png" className=" w-[30rem] rounded-md" />
-                            <h1 className="font-bold text-center text-2xl mb-3">Kabinet Octagram</h1>
-                            <p className="text-justify md:w-3/4 lg:w-3/4 w-full mb-3">Kabinet Kemahasiswaan periode 2023-2024 dirancang sebagai motor penggerak inovasi dan kolaborasi, dengan fokus pada pengembangan mahasiswa yang lebih inklusif, progresif, dan berdaya saing.</p>
+                            <Image src="/icon/cakravikasa-nonbg.png" className=" w-[30rem] rounded-md" />
+                            <h1 className="font-bold text-center text-2xl mb-3">Kabinet Caravikasa</h1>
+                            <p className="text-justify md:w-3/4 lg:w-3/4 w-full mb-3">Kabinet Cakravikasa dapat diartikan sebagai kabinet yang bergerak dinamis dan terus berkembang. Nama ini menggambarkan "HIMATIKOM" yang selalu berputar dan bergerak maju, berinovasi, serta berkembang menuju kemajuan yang berkelanjutan dan konsisten.</p>
                         </div>
                         <div className="flex flex-col p-5 rounded-lg bg-white md:w-3/4 lg:w-3/4 w-full md:justify-self-start lg:justify-self-start justify-self-center shadow-md">
                             <div className="mb-3">
                                 <h1 className="font-bold text-2xl">Visi</h1>
-                                <p className="text-justify w-full">VISI HIMATIKOM POLSUB KABINET OCTAGRAM “Mewujudkan Himpunan Mahasiswa Teknologi Informasi dan Komputer (HIMATIKOM) sebagai wadah dalam pengembangan dan pemberdayaan Mahasiswa teknologi Informasi dan Komputer dalam berorganisasi yang menjungjung tinggi rasa kekeluargaan.”</p>
+                                <p className="text-justify w-full">VISI HIMATIKOM POLSUB KABINET CARAVIKASA “Menjadikan Himpunan Mahasiswa Teknologi Informasi dan Komputer (HIMATIKOM) sebagai ruang yang dinamis, inklusif, ekspresif, dan inovatif untuk berekspresi dan berinovasi, serta meningkatkan konsistensi gerakan pengkaderan yang efektif dan unggul.”</p>
                             </div>
                             <hr />
                             <div className="mb-3">
                                 <h1 className="font-bold text-2xl">Misi</h1>
                                 <ul className="list-decimal pl-4">
-                                    <li>Menjaga Kestabilan Pengembangan dan Pemberdayaan Di Dalam Himpunan Sesuai Dengan AD/ART</li>
-                                    <li>Menyediakan Sarana Untuk Mendorong Kreativitas, Inovasi, Aspirasi, dan Kolaborasi Antar Anggota</li>
-                                    <li>Meningkatkan Kualitas Proker dan Agenda Himpunan Demi Memperkuat Ikatan Kekeluargaan Pada Himpunan</li>
+                                    <li>Menjadikan HIMATIKOM sebagai wadah untuk mengoptimalkan minat, bakat, dan potensi mahasiswa JTIK. </li>
+                                    <li>Meningkatkan rasa kebersamaan dan kepedulian antar mahasiswa JTIK POLSUB.</li>
+                                    <li>Menjalin kerja sama dan membangun relasi dengan berbagai pihak, baik internal maupun eksternal.</li>
+                                    <li>Menciptakan lingkungan organisasi yang nyaman dengan suasana 3S (Santai, Serius, Selesai)</li>
                                 </ul>
                             </div>
                             <hr />
                             <div className="mb-3">
                                 <h1 className="font-bold text-2xl">Makna Logo</h1>
-                                <p className="text-justify w-full">VISI HIMATIKOM POLSUB KABINET OCTAGRAM “Mewujudkan Himpunan Mahasiswa Teknologi Informasi dan Komputer (HIMATIKOM) sebagai wadah dalam pengembangan dan pemberdayaan Mahasiswa teknologi Informasi dan Komputer dalam berorganisasi yang menjungjung tinggi rasa kekeluargaan.”</p>
+                                <p className="text-justify w-full">Kabinet Cakravikasa dapat diartikan sebagai kabinet yang bergerak dinamis dan terus
+berkembang. Nama ini menggambarkan "HIMATIKOM" yang selalu berputar dan bergerak
+maju, berinovasi, serta berkembang menuju kemajuan yang berkelanjutan dan konsisten.
+(“cakra” yang artinya roda atau pusat energi, dan “vikasa” yang artinya mekar atau
+berkembang).</p>
                             </div>
                             <hr />
                             <div className="mb-3">
-                                <h1 className="font-bold text-2xl">Makna Warna</h1>
+                                <h1 className="font-bold text-2xl">Nilai Kebudayaan HIMATIKOM</h1>
                                 <ul className="list-decimal pl-4">
-                                    <li>Biru melambangkan kedamaian, kejujuran dan percaya diri.</li>
-                                    <li>Ungu melambangkan kreativitas dan kebijaksanaan.</li>
-                                    <li>Merah Muda melambangkan kekeluargaan yang harmonis.</li>
-                                    <li>Ketiga warna menyatu bermakna tentang keberanian yang tenang, penuh kasih, dan percaya diri.</li>
+                                    <li>Himpunan Mahasiswa Teknologi Informasi dan Komputer berdiri berasaskan kekeluargaan
+dimana setiap anggota merasa sebagai satu keluarga dan merasakan kebersamaan di dalam
+HIMATIKOM.</li>
+                                    <li>Setiap permasalahan yang terjadi di himpunan harus dibicarakan dan dicarikan solusi dari
+permasalahan tersebut secara kekeluargaan.</li>
+                                    <li>Ketika terjadinya regenerasi seluruh keluarga besar HIMATIKOM tidak diperbolehkan
+memanggil mahasiswa baru dengan sebutan MABA, disarankan memanggil dengan
+sebutan adik atau nama personal.</li>
+                                    <li>Seluruh bagian yang menjadi keluarga besar HIMATIKOM disarankan untuk saling
+menyapa atau memanggil dengan sebutan “Kakak, “Aa”, atau “Teteh” kepada yang lebih
+tua, begitupun sebaliknya disarankan untuk menyapa dan memanggil “Adik” atau nama
+personal kepada yang lebih muda.</li>
+                                <li>Melakukan rutinitas berkumpul untuk melakukan makan bersama (Iiwetan) atau hanya
+                                    sekedar ngopi untuk menjalin kebersamaan dan meningkatkan chemistry.</li>
                                 </ul>
                             </div>
                         </div>

@@ -6,7 +6,7 @@ const FrontFooter = () => {
         <div className="bg-zinc-900 py-5 lg:px-[6rem] md:px-[6rem] px-5 flex flex-col md:flex-row lg:flex-row flex-wrap text-white justify-between gap-3">
             <div className="flex flex-row flex-wrap gap-3">
                 <Image src="/icon/logo-himatikom.png" className="w-[40px] h-[40px]" />
-                <Image src="/icon/octagram-with-border-radius.png" className="h-[40px]" />
+                <Image src="/icon/cakravikasa-header.jpg" className="h-[40px]" style={{ borderRadius: '30%' }} />
             </div>
             <div className="flex flex-col gap-1">
                 <h1>{new Date().getFullYear()} &copy; <Link href="https://github.com/Dept-Ristek/">Departemen Riset dan Teknologi.</Link></h1>

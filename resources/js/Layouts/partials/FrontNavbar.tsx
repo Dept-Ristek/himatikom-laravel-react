@@ -45,7 +45,7 @@ const FrontNavbar = () => {
                 <Link href={route('v2.front.index')}>
                     <div className="flex flex-row gap-3 justify-center items-center">
                         <Image src="/icon/logo-himatikom.png" width={40} height={30} />
-                        <Image src="/icon/octagram-with-border-radius.png" width={90} />
+                        <Image src="/icon/cakravikasa-header.jpg" width={90} style={{ borderRadius: '30%' }} />
                     </div>
                 </Link>
             </div>
