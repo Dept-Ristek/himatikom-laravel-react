@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\Admin\TempPemilihanController as AdminTempPemilihanController;
 use App\Http\Controllers\Admin\TempTokenController as AdminTempTokenController;
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\InboxController;
 use App\Http\Controllers\KepanitiaanController;
@@ -14,6 +16,7 @@ use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProkerController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TempPemilihanController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Redirect;
@@ -54,10 +57,21 @@ Route::prefix('v2')->name('v2.')->group(function() {
         Route::post('/mubes/pemilihan', 'store')->name('mubes.pemilihan.store');
     });
 
+    Route::middleware(['auth', 'verified'])->group(function () {
+        // Route untuk panitia melihat QR Code
+    });
+
+    // Route halaman scanner untuk peserta
+    Route::get('/absensi/scanner', [AttendanceController::class, 'scannerPage'])->name('attendance.scanner');
+    // API endpoint untuk memproses data dari QR scanner
+    Route::post('/absensi/record', [AttendanceController::class, 'record'])->name('attendance.record');
+    Route::get('/my-reports', [ReportController::class, 'userReport'])->name('reports.user');
+
 });
 
 Route::prefix('admin')->name('admin.')->group(function() {
     Route::middleware(['auth'])->group(function() {
+
         // Dashboard
         Route::resource('dashboard', DashboardController::class);
         // Dashboard additional
@@ -111,6 +125,12 @@ Route::prefix('admin')->name('admin.')->group(function() {
         // Token Pemilihan
         Route::get('temp/token/export', [AdminTempTokenController::class, 'export'])->name('token.export');
         Route::resource('temp/token', AdminTempTokenController::class);
+
+        // Events untuk absensi
+        Route::resource('events', EventController::class);
+        Route::get('/events/{event}/qr', [AttendanceController::class, 'showQr'])->name('events.qr');
+        Route::get('/events/{event}/export/excel', [ReportController::class, 'exportExcel'])->name('reports.export.excel');
+
     });
 });
 

@@ -11,6 +11,10 @@ import { Button } from '@/Components/ui/button';
 
 const Welcome = ({ title }: { title: string }) => {
     const user = usePage().props.auth.user
+    const DEFAULT_IMAGE_PATH = '/images/default-avatar.png';
+    const DEFAULT_BLOG_IMAGE = '/icon/preview.jpg';
+    const DEFAULT_PRODUCT_IMAGE = '/icon/preview.jpg';
+
     const [image, setImage] = useState<string[]>([]);
     const [blogs, setBlog] = useState<Blog[]>([]);
     const [products, setProduct] = useState<Product[]>([]);
@@ -110,11 +114,17 @@ const Welcome = ({ title }: { title: string }) => {
                         blogs.map((data, index) => {
                             return (
                                 <div className="flex flex-col p-2 hover:scale-105 transition-transform duration-500 bg-slate-50 shadow-md rounded-lg" key={index}>
-                                    <Image src={data.image as string} className="rounded-md mb-3" />
+                                    {/* <Image
+                                        src={(typeof data.image === 'string' && data.image) ? data.image : DEFAULT_BLOG_IMAGE}
+                                        className="rounded-md mb-3"
+                                        alt={data.title}
+                                    /> */}
+                                    <Image src={DEFAULT_BLOG_IMAGE} alt={data.title}/>
                                     <h1 className="font-bold text-center mb-3">{data.title}</h1>
                                     <Link href={route('v2.front.blog.detail', data.id)}>
                                         <Button>Detail</Button>
                                     </Link>
+
                                 </div>
                             )
                         })
@@ -133,6 +143,8 @@ const Welcome = ({ title }: { title: string }) => {
                 }
             </section>
 
+
+
             {/* Section Product */}
             <section className="mb-[3rem] flex flex-col justify-center items-center">
                 <h1 className="font-extrabold text-3xl text-center mb-5 cursor-default">HIMATIKOM Store</h1>
@@ -141,7 +153,12 @@ const Welcome = ({ title }: { title: string }) => {
                         products.map((data, index) => {
                             return (
                                 <div className="flex flex-col p-2 hover:scale-105 transition-transform duration-500 bg-slate-50 shadow-md rounded-lg" key={index}>
-                                    <Image src={data.image as string} className="rounded-md mb-3" />
+                                    {/* <Image
+                                        src={(typeof data.image === 'string' && data.image) ? data.image : DEFAULT_PRODUCT_IMAGE}
+                                        className="rounded-md mb-3"
+                                        alt={data.name}
+                                    /> */}
+                                    <Image src={DEFAULT_PRODUCT_IMAGE} alt={data.name}/>
                                     <h1 className="font-bold mb-3">{data.name}</h1>
                                     <h3 className="text-sm font-bold mb-3">Rp. {Intl.NumberFormat('id-ID').format(+data.price)}</h3>
                                     <Link href={route('v2.front.product.detail', data.id)}>

@@ -8,6 +8,8 @@ import Image from "@/Components/Image";
 import { Button } from "@/Components/ui/button";
 
 const PageProducts = ({ title }: { title: string }) => {
+    const DEFAULT_PRODUCT_IMAGE = '/image/preview.jpg';
+
     const [products, setProducts] = useState<Product[]>([]);
     const [count, setCount] = useState<number>(4);
 
@@ -22,7 +24,7 @@ const PageProducts = ({ title }: { title: string }) => {
 
     useEffect(() => {
         getAllProduct()
-    }, [products])
+    }, [count]);
 
     const handleClick = () => {
         const newCount = count + 4
@@ -39,10 +41,16 @@ const PageProducts = ({ title }: { title: string }) => {
                         products.map((data, index) => {
                             return (
                                 <div className="flex flex-col p-2 hover:scale-105 transition-transform duration-500 bg-slate-50 shadow-md rounded-lg" key={index}>
-                                    <Image src={data.image as string} className="rounded-md mb-3" />
+                                    {/* sebagai backup di koment dulu untuk gambar aslinya */}
+                                    {/* <Image
+                                        src={(typeof data.image === 'string' && data.image) ? data.image : DEFAULT_PRODUCT_IMAGE}
+                                        className="rounded-md mb-3"
+                                        alt={data.name}
+                                    /> */}
+                                    <Image src={DEFAULT_PRODUCT_IMAGE} alt={data.name}/>
                                     <h1 className="font-bold mb-3">{data.name}</h1>
                                     <h3 className="text-sm font-bold mb-3">Rp. {Intl.NumberFormat('id-ID').format(+data.price)}</h3>
-                                    <Link href="/">
+                                    <Link href={route('v2.front.product.detail', data.id)}>
                                         <Button>Detail</Button>
                                     </Link>
                                 </div>

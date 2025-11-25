@@ -57,7 +57,7 @@ class BlogController extends Controller
             $validated['slug'] = Str::slug($validated['title']);
             $validated['user_id'] = $user->id;
             if ($request->hasFile('image')) {
-                $filePath = $request->file('image')->store('blogs');
+                $filePath = $request->file('image')->store('blogs','public');
                 $validated['image'] = "/storage/$filePath";
             } else {
                 $validated['image'] = "/icon/preview.jpg";
@@ -97,7 +97,7 @@ class BlogController extends Controller
             $validated['slug'] = Str::slug($validated['title']);
             $validated['user_id'] = $user->id;
             if ($request->hasFile('image')) {
-                $filePath = $request->file('image')->store('blogs');
+                $filePath = $request->file('image')->store('blogs','public');
                 $validated['image'] = "/storage/$filePath";
             } else {
                 $validated['image'] = "/icon/preview.jpg";

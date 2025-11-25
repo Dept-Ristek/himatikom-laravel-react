@@ -23,7 +23,7 @@ export default function Authenticated({ header, children }: PropsWithChildren<{ 
                             </div>
 
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
+                                <NavLink href="/admin/dashboard" active={window.location.pathname === '/admin/dashboard'}>
                                     Dashboard
                                 </NavLink>
                             </div>
@@ -94,7 +94,7 @@ export default function Authenticated({ header, children }: PropsWithChildren<{ 
 
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
                     <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
+                        <ResponsiveNavLink href="/admin/dashboard" active={window.location.pathname === '/admin/dashboard'}>
                             Dashboard
                         </ResponsiveNavLink>
                     </div>
@@ -109,6 +109,7 @@ export default function Authenticated({ header, children }: PropsWithChildren<{ 
 
                         <div className="mt-3 space-y-1">
                             <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
+                            <ResponsiveNavLink href={route('v2.reports.user')}>Attendance</ResponsiveNavLink>
                             <ResponsiveNavLink method="post" href={route('logout')} as="button">
                                 Log Out
                             </ResponsiveNavLink>

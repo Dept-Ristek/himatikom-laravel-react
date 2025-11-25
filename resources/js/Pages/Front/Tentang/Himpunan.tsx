@@ -13,6 +13,7 @@ import {
 } from "@/Components/ui/dialog";
 
 const Himpunan = ({ title, kepengurusans }: { title: string; kepengurusans: Kepengurusan[] }) => {
+    const DEFAULT_BLOG_IMAGE = '/image/preview.jpg';
     const truncate = (str: string, num: number) => {
         const words: string[] = str.split(" ");
         if (words.length <= num) {
@@ -90,16 +91,34 @@ personal kepada yang lebih muda.</li>
                                     <Dialog key={data.id}>
                                         <DialogTrigger>
                                             <div className="flex flex-col p-2 hover:scale-105 transition-transform duration-500 bg-zinc-900 rounded-lg">
-                                                <Image src={data.poster as string} className="rounded-md mb-3" />
+                                                {/* <Image src={data.poster as string} className="rounded-md mb-3" /> */}
+                                                <Image src={DEFAULT_BLOG_IMAGE}/>
+
+
                                                 <h1 className="font-bold text-center text-slate-100 mb-3">{data.name}</h1>
                                                 <p className="text-slate-100 text-justify text-sm mb-3">{truncate(data.description, 10)}</p>
                                                 <Button className="bg-secondary text-black hover:text-white">Detail</Button>
                                             </div>
                                         </DialogTrigger>
-                                        <DialogContent className="bg-zinc-900 border-0 text-slate-100">
+                                        <DialogContent className="bg-zinc-900 border-0 text-slate-100 max-h-[85vh] overflow-y-auto no-scrollbar">
+                                            <style>
+                                                {`
+                                                  .no-scrollbar::-webkit-scrollbar {
+                                                      display: none;
+                                                  }
+                                                  .no-scrollbar {
+                                                      -ms-overflow-style: none;
+                                                      scrollbar-width: none;
+                                                  }
+                                                `}
+                                            </style>
+
                                             <DialogHeader>
                                                 <DialogTitle>{data.name}</DialogTitle>
-                                                <Image src={data.poster as string} className="rounded-lg mb-[2rem]" />
+                                                {/* <Image src={data.poster as string} className="rounded-lg mb-[2rem]" /> */}
+                                                <Image src={DEFAULT_BLOG_IMAGE}/>
+
+
                                                 <DialogDescription className="flex flex-col gap-3">
                                                     <p className="text-justify text-slate-100">
                                                         {data.description}

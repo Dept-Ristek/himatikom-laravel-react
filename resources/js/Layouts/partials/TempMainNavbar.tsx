@@ -73,7 +73,11 @@ const TempMainNavbar = ({ user, className }: TempMainNavbarProps) => {
                                 Landing Page
                             </Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem>Profile</DropdownMenuItem>
+                        <DropdownMenuItem>
+                            <Link href={route('auth.profile.edit')}>
+                                Profile
+                            </Link>
+                        </DropdownMenuItem>
                         <DropdownMenuItem asChild>
                             <AlertDialog>
                                 <AlertDialogTrigger className="text-sm p-2 w-full text-left hover:text-black hover:bg-secondary rounded-md">Logout</AlertDialogTrigger>

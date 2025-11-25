@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const PageBlogs = ({ title }: { title: string; }) => {
+    const DEFAULT_BLOG_IMAGE = '/image/preview.jpg';
     const [blogs, setBlogs] = useState<Blog[]>([]);
     const [count, setCount] = useState<number>(6);
     const getAllBlog = () => {
@@ -37,7 +38,9 @@ const PageBlogs = ({ title }: { title: string; }) => {
                         blogs.map((data, index) => {
                             return (
                                 <div className="flex flex-col p-2 hover:scale-105 transition-transform duration-500 bg-slate-50 shadow-md rounded-lg" key={index}>
-                                    <Image src={data.image as string} className="rounded-md mb-3" />
+                                    {/* <Image src={data.image as string} className="rounded-md mb-3" /> */}
+                                    <Image src={DEFAULT_BLOG_IMAGE} alt={data.title}/>
+
                                     <h1 className="font-bold text-center mb-3">{data.title}</h1>
                                     <Link href={route('v2.front.blog.detail', data.id)}>
                                         <Button>Detail</Button>

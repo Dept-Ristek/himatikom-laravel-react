@@ -52,7 +52,7 @@ class ProdiController extends Controller
             $validated = $request->validated();
             $validated['slug'] = Str::slug($validated['name']);
             if ($request->hasFile('image')) {
-                $filePath = $request->file('image')->store('prodis');
+                $filePath = $request->file('image')->store('prodis','public');
                 $validated['image'] = "/storage/$filePath";
             } else {
                 $validated['image'] = '/icon/preview.jpg';
@@ -89,7 +89,7 @@ class ProdiController extends Controller
             $validated = $request->validated();
             $validated['slug'] = Str::slug($validated['name']);
             if ($request->hasFile('image')) {
-                $filePath = $request->file('image')->store('prodis');
+                $filePath = $request->file('image')->store('prodis','public');
                 $validated['image'] = "/storage/$filePath";
             } else {
                 $validated['image'] = $prodi->image;

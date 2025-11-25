@@ -63,17 +63,17 @@ const MainNavbar = ({ user, className }: MainNavbarProps) => {
                     <DropdownMenuContent className="bg-zinc-900 dark:bg-slate-700 text-white border border-slate-700">
                         <DropdownMenuLabel>My Account</DropdownMenuLabel>
                         <DropdownMenuSeparator className="bg-slate-100" />
-                        <DropdownMenuItem>
+                        {/* <DropdownMenuItem>
                             <Link href={route('admin.pemilihan.index')}>
                                 Dashboard Pemilihan
                             </Link>
-                        </DropdownMenuItem>
+                        </DropdownMenuItem> */}
                         <DropdownMenuItem>
                             <Link href={route('v2.front.index')}>
                                 Landing Page
                             </Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem>Profile</DropdownMenuItem>
+                        {/* <DropdownMenuItem>Profile</DropdownMenuItem> */}
                         <DropdownMenuItem asChild>
                             <AlertDialog>
                                 <AlertDialogTrigger className="text-sm p-2 w-full text-left hover:text-black hover:bg-secondary rounded-md">Logout</AlertDialogTrigger>

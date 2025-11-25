@@ -4,12 +4,11 @@ import UpdatePasswordForm from './Partials/UpdatePasswordForm';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm';
 import { Head } from '@inertiajs/react';
 import { PageProps } from '@/types';
+import MainLayout from '@/Layouts/MainLayout';
 
 export default function Edit({ mustVerifyEmail, status }: PageProps<{ mustVerifyEmail: boolean, status?: string }>) {
     return (
-        <AuthenticatedLayout
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Profile</h2>}
-        >
+        <MainLayout>
             <Head title="Profile" />
 
             <div className="py-12">
@@ -31,6 +30,6 @@ export default function Edit({ mustVerifyEmail, status }: PageProps<{ mustVerify
                     </div>
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </MainLayout>
     );
 }

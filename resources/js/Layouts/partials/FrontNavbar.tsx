@@ -126,6 +126,11 @@ const FrontNavbar = () => {
                                         </Link>
                                     </MenubarItem>
                                     <MenubarItem inset>
+                                        <Link href={route('v2.attendance.scanner')} as="button">
+                                            Scan Absensi
+                                        </Link>
+                                    </MenubarItem>
+                                    <MenubarItem inset>
                                         <Link href={route('logout')} as="button" method='post'>
                                             Logout
                                         </Link>
@@ -206,6 +211,9 @@ const FrontNavbar = () => {
                                         <AccordionContent className="flex flex-col gap-3">
                                             <Link href={route('admin.dashboard.index')}>
                                                 Dashboard
+                                            </Link>
+                                            <Link href={route('v2.attendance.scanner')}>
+                                                Scan Absensi
                                             </Link>
                                             <Link href={route('logout')} method="post" as="button">
                                                 Logout

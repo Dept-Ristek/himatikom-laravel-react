@@ -18,10 +18,10 @@ class Blog extends Model
         'slug',
         'image',
         'content',
+        'created_at',
     ];
 
     protected $hidden = [
-        'created_at',
         'updated_at',
         'deleted_at',
     ];

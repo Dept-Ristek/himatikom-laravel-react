@@ -44,7 +44,7 @@ class DocumentController extends Controller
         DB::transaction(function() use($request, $user) {
             $validated = $request->validated();
             if ($request->hasFile('filepath')) {
-                $filePath = $request->file('filepath')->store('documents');
+                $filePath = $request->file('filepath')->store('documents','public');
                 $validated['filepath'] = "/storage/$filePath";
             } else {
                 $validated['filepath'] = null;
@@ -82,7 +82,7 @@ class DocumentController extends Controller
         DB::transaction(function() use($request, $user, $document) {
             $validated = $request->validated();
             if ($request->hasFile('filepath')) {
-                $filePath = $request->file('filepath')->store('documents');
+                $filePath = $request->file('filepath')->store('documents','public');
                 $validated['filepath'] = "/storage/$filePath";
             } else {
                 $validated['filepath'] = $document->filepath;

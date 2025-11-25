@@ -23,6 +23,8 @@ import {
     MailWarningIcon,
     Box,
     Archive,
+    CalendarDays,
+    CalendarCheck
 } from "lucide-react";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/Components/ui/alert-dialog";
 import AlertLogout from "@/Layouts/components/AlertLogout";
@@ -108,21 +110,33 @@ const CommandContent = ({ className }: CommandContentProps) => {
                                 Dokumen
                             </CommandItem>
                         </Link>
+                        <Link href={route('admin.events.index')}>
+                            <CommandItem className={url == 'admin.events.index' ? "bg-white text-black" : "text-white"}>
+                                <CalendarDays size={20} className="mr-2" />
+                                Event
+                            </CommandItem>
+                        </Link>
                     </CommandGroup> : <></>}
                 <CommandSeparator />
-                <CommandGroup heading="Settings">
+                <CommandGroup heading={`Account ${user.name}`}>
                     <Link href="/profile">
                         <CommandItem className={url == '/profile' ? "bg-white text-black" : "text-white"}>
                             <User size={20} className="mr-2" />
                             Profile
                         </CommandItem>
                     </Link>
-                    <Link href="/settings">
+                    <Link href={route('v2.reports.user')}>
+                        <CommandItem className={url == 'v2.reports.user' ? "bg-white text-black" : "text-white"}>
+                            <CalendarCheck size={20} className="mr-2" />
+                            Attendance
+                        </CommandItem>
+                    </Link>
+                    {/* <Link href="/settings">
                         <CommandItem className={url == '/settings' ? "bg-white text-black" : "text-white"}>
                             <Settings size={20} className="mr-2" />
                             Settings
                         </CommandItem>
-                    </Link>
+                    </Link> */}
                     <CommandItem className="text-white" asChild>
                         <AlertDialog>
                             <AlertDialogTrigger className="text-sm p-2 w-full text-left text-white hover:text-black hover:bg-secondary rounded-md flex">

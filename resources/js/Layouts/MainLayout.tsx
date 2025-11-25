@@ -4,6 +4,8 @@ import { User } from "@/types";
 import { Toaster } from "@/Components/ui/toaster";
 import MainNavbar from "@/Layouts/partials/MainNavbar";
 import MainSidebar from "@/Layouts/partials/MainSidebar";
+
+
 const MainLayout = ({ children }: PropsWithChildren) => {
     const user: User = usePage().props.auth.user;
     return (

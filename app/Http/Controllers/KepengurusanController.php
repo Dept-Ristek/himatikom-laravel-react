@@ -43,7 +43,7 @@ class KepengurusanController extends Controller
         DB::transaction(function() use($request) {
             $validated = $request->validated();
             if ($request->hasFile('poster')) {
-                $filePath = $request->file('poster')->store('posters');
+                $filePath = $request->file('poster')->store('posters','public');
                 $validated['poster'] = "/storage/$filePath";
             } else {
                 $validated['poster'] = "/icon/ketua.png";
@@ -80,8 +80,7 @@ class KepengurusanController extends Controller
         DB::transaction(function() use($request, $kepengurusan) {
             $validated = $request->validated();
             if ($request->hasFile('poster')) {
-                // unlink($kepengurusan->poster);
-                $filePath = $request->file('poster')->store('posters');
+                $filePath = $request->file('poster')->store('posters', 'public');
                 $validated['poster'] = "/storage/$filePath";
             } else {
                 $validated['poster'] = $kepengurusan->poster;

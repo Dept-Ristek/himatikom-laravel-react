@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 
 const PageDetailBlog = ({ title, blog }: { title: string; blog: Blog; }) => {
+    const DEFAULT_BLOG_IMAGE = '/image/preview.jpg';
     const [blogs, setBlogs] = useState<Blog[]>([]);
     const getAllBlog = (id: string) => {
         axios.get(route('api.blog.get', [id, 3])).then((response) => {
@@ -29,7 +30,10 @@ const PageDetailBlog = ({ title, blog }: { title: string; blog: Blog; }) => {
                 <h1 className="font-extrabold text-3xl text-center mb-5 cursor-default my-5">{blog.title}</h1>
                 <div className="grid grid-cols-1 rounded-lg justify-items-center">
                     <div className="flex flex-col p-2 rounded-lg justify-center items-center md:w-4/5 lg:w-4/5 w-full">
-                        <Image src={blog.image as string} className="rounded-lg shadow-md mb-[2rem] w-[60rem]" />
+                        {/* <Image src={blog.image as string} className="rounded-lg shadow-md mb-[2rem] w-[60rem]" /> */}
+                        <Image src={DEFAULT_BLOG_IMAGE} alt={blog.title}/>
+
+
                         <ReactQuill value={blog.content} readOnly theme="bubble" className="lg:w-3/5 md:w-3/5 w-full text-justify" />
                         <Separator />
                     </div>
@@ -43,7 +47,9 @@ const PageDetailBlog = ({ title, blog }: { title: string; blog: Blog; }) => {
                         blogs.map((data, index) => {
                             return (
                                 <div className="flex flex-col p-2 hover:scale-105 transition-transform duration-500 bg-slate-50 shadow-md rounded-lg" key={index}>
-                                    <Image src={data.image as string} className="rounded-md mb-3" />
+                                    {/* <Image src={data.image as string} className="rounded-md mb-3" /> */}
+                                    <Image src={DEFAULT_BLOG_IMAGE} alt={data.title}/>
+
                                     <h1 className="font-bold text-center mb-3">{data.title}</h1>
                                     <Link href={route('v2.front.blog.detail', data.id)}>
                                         <Button>Detail</Button>

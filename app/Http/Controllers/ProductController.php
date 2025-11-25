@@ -50,7 +50,7 @@ class ProductController extends Controller
             $validated = $request->validated();
             $validated['slug'] = Str::slug($validated['name']);
             if ($request->hasFile('image')) {
-                $pathFile = $request->file('image')->store('products');
+                $pathFile = $request->file('image')->store('products','public');
                 $validated['image'] = "/storage/$pathFile";
             } else {
                 $validated['image'] = "/icon/preview.jpg";
@@ -87,7 +87,7 @@ class ProductController extends Controller
             $validated = $request->validated();
             $validated['slug'] = Str::slug($validated['name']);
             if ($request->hasFile('image')) {
-                $pathFile = $request->file('image')->store('products');
+                $pathFile = $request->file('image')->store('products','public');
                 $validated['image'] = "/storage/$pathFile";
             } else {
                 $validated['image'] = $product->image;

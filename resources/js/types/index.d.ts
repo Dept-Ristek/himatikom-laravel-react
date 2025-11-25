@@ -123,6 +123,59 @@ export interface Token {
     temp_pemilian?: Pemilihan[]
 }
 
+
+export interface Attendance {
+    id: string | number;
+    user: User;
+    attended_at: string;
+}
+export interface Event {
+    id?: number;
+    name: string;
+    description: string;
+    start_time: string;
+    end_time: string;
+    location: string;
+    latitude: string | number;
+    longitude: string | number;
+    creator: User;
+    attendances?: Attendance[];
+}
+
+interface ShowQrProps {
+    auth: any;
+    event: Event;
+    attendanceUrl: string;
+}
+
+export interface PaginationLink {
+    url: string | null;
+    label: string;
+    active: boolean;
+}
+
+export interface PaginatedData<T> {
+    data: T[];
+    links: PaginationLink[];
+    meta?: {
+        current_page: number;
+        from: number;
+        last_page: number;
+        path: string;
+        per_page: number;
+        to: number;
+        total: number;
+    };
+}
+
+export interface Attendance {
+    id: string | number;
+    user?: User;
+    attended_at: string;
+    event?: Event;
+}
+
+
 export type PageProps<
     T extends Record<string, unknown> = Record<string, unknown>
 > = T & {
