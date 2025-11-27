@@ -91,8 +91,8 @@ personal kepada yang lebih muda.</li>
                                     <Dialog key={data.id}>
                                         <DialogTrigger>
                                             <div className="flex flex-col p-2 hover:scale-105 transition-transform duration-500 bg-zinc-900 rounded-lg">
-                                                {/* <Image src={data.poster as string} className="rounded-md mb-3" /> */}
-                                                <Image src={DEFAULT_BLOG_IMAGE}/>
+                                                <Image src={data.poster as string} className="rounded-md mb-3" />
+                                                {/* <Image src={DEFAULT_BLOG_IMAGE}/> */}
 
 
                                                 <h1 className="font-bold text-center text-slate-100 mb-3">{data.name}</h1>
