@@ -115,8 +115,8 @@ personal kepada yang lebih muda.</li>
 
                                             <DialogHeader>
                                                 <DialogTitle>{data.name}</DialogTitle>
-                                                {/* <Image src={data.poster as string} className="rounded-lg mb-[2rem]" /> */}
-                                                <Image src={DEFAULT_BLOG_IMAGE}/>
+                                                <Image src={data.poster as string} className="rounded-lg mb-[2rem]" />
+                                                {/* <Image src={DEFAULT_BLOG_IMAGE}/> */}
 
 
                                                 <DialogDescription className="flex flex-col gap-3">
